@@ -4,10 +4,11 @@
     position: fixed;
     z-index: 99;
     margin-left: 10%;
-    margin-top: 90%;
+    margin-top: 110%;
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    background-color: #FFFFFF;
 
 }
 
@@ -15,10 +16,12 @@
     position: fixed;
     z-index: 99;
     margin-left: 40%;
-    margin-top: 90%;
+    margin-top: 110%;
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    background-color: #FFFFFF;
+
 }
 
 
@@ -27,9 +30,11 @@
     z-index: 99; 
     margin-left: 70%;
     margin-top: 100px;
-    margin-top: 90%;
+    margin-top: 110%;
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    background-color: #FFFFFF;
+
 }
 
