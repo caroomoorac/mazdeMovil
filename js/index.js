@@ -533,7 +533,7 @@ function setupWorld() {
         requestAnimationFrame( animate );
         //render();
         renderer.render( scene, camera );
-        controls.update()
+        //controls.update()
 
     }
 
