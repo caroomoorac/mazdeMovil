@@ -404,9 +404,6 @@ function setupWorld() {
         
       });
     });
-    
-
-
 
    /* var murakit = new THREE.MTLLoader();
     murakit.load("models/model/laCarniceriaMazDE.mtl", function(materials) {
@@ -421,9 +418,6 @@ function setupWorld() {
         
       });
     });*/
-
-
-
 
     var light = new THREE.AmbientLight( 0xFFFFFF, 0.2 ); // soft white light
     scene.add( light );
@@ -471,7 +465,6 @@ function setupWorld() {
         camera.position.z
     );*/
 
-   // controls = new 
 
   
 
@@ -480,33 +473,45 @@ function setupWorld() {
     document.getElementById("mvForward").addEventListener("mouseup", function(){
         if (timer) clearInterval(timer)
     });
-    document.getElementById("rtLeft").addEventListener( 'click', rotateLeft );
-    document.getElementById("rtRight").addEventListener( 'click', rotateRight );
-    
-    function rotateLeft() { 
-        camera.rotation.y += Math.PI / 4;
-    }
-
-    function rotateRight() { 
-        camera.rotation.y -= Math.PI / 4;
-    }
-
-
 
     document.getElementById("mvForward").addEventListener('touchstart', process_touchstart, false);
     document.getElementById("mvForward").addEventListener("touchcancel", handleCancel, false);
     document.getElementById("mvForward").addEventListener("touchmove", handleMove, false);
     document.getElementById("mvForward").addEventListener('touchend', process_touchend, false);
 
+    document.getElementById("rtLeft").addEventListener( 'touchstart', rotateLeft, false );
+    document.getElementById("rtLeft").addEventListener("touchcancel", handleCancel, false);
+    document.getElementById("rtLeft").addEventListener("touchmove", handleMove, false);
+    document.getElementById("rtLeft").addEventListener('touchend', process_touchend, false);
+
+
+    document.getElementById("rtRight").addEventListener( 'touchstart', rotateRight, false );
+    document.getElementById("rtRight").addEventListener("touchcancel", handleCancel, false);
+    document.getElementById("rtRight").addEventListener("touchmove", handleMove, false);
+    document.getElementById("rtRight").addEventListener('touchend', process_touchend, false);
+
 
     function process_touchstart(evt) {
         evt.preventDefault();
-
         timer=setInterval(function(){
             camera.getWorldDirection( dir );
             camera.position.addScaledVector( dir, speed );
         }, 100); 
         
+    }
+
+    function rotateLeft(evt) { 
+        evt.preventDefault();
+        timer=setInterval(function(){
+            camera.rotation.y += Math.PI / 40;
+        }, 100); 
+    }
+
+    function rotateRight(evt) { 
+        evt.preventDefault();
+        timer=setInterval(function(){
+            camera.rotation.y -= Math.PI / 40;
+        }, 100);
     }
 
     function process_touchend(evt) {
@@ -544,19 +549,6 @@ function setupWorld() {
             camera.position.addScaledVector( dir, speed );
         }, 100); // the above code is executed every 100 ms
         //camera.translateZ( -moveDistance );
-
-    /*    vrControls.target.set (
-            camera.position.x+ 0.1,
-            camera.position.y+ 0.1,
-            camera.position.z+ 0.1
-        );*/
-        
-        /*camera.position.set(camera.position.x + 0.1,
-            camera.position.y+ 0.1,
-            camera.position.z+ 0.1);*/
-       /* camera.lookAt(new THREE.Vector3(camera.position.x + 0.1,
-            camera.position.y,
-            camera.position.z));*/
     }
 
 
