@@ -1,13 +1,12 @@
-#buttons {
+/*#buttons {
     position: absolute;
     width: 100%;
     height:50px;
     /*margin-top:34em;
     width: 50%;
-    height: 50%;*/
+    height: 50%;
     overflow: auto;
     margin: auto;
-    position: absolute;
     top: 0; left: 0%; bottom: 0; right: 0;
     background: none;
 	color: inherit;
@@ -22,7 +21,11 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
-}
+}*/
+
+
+
+
 
 img {
     -khtml-user-select: none;
@@ -43,10 +46,7 @@ img {
     user-select: none;
 }
 
-h1 {
-    font-size: 1px;
-    font-family: 'Press Start 2P', cursive;
-}
+
 
 ul li a { font-family: 'Press Start 2P', cursive; }
 
@@ -136,7 +136,8 @@ ul li a { font-family: 'Press Start 2P', cursive; }
 #footer{
     background-color: black;
     margin-top:0px;
-    height:45px;
+    height:44px;
+    border: 1px solid #ffffff;
   }
 
 
@@ -148,6 +149,8 @@ ul li a { font-family: 'Press Start 2P', cursive; }
         height: 50px;
     }
 
+
+
   #buttons {
     position: absolute;
     width: 100%;
@@ -157,16 +160,68 @@ ul li a { font-family: 'Press Start 2P', cursive; }
     height: 50%;*/
     overflow: auto;
     margin: auto;
-    position: absolute;
-    top: 76%; left: 0%; bottom: 0; right: 0;
-    background: none;
+    top: 79%; left: 0%; bottom: 0; right: 0;
+    /*background: none;
 	color: inherit;
 	border: none;
 	padding: 0;
 	font: inherit;
 	cursor: pointer;
-	outline: inherit;
-}
+    outline: inherit;*/
+    position: absolute;
+    z-index: 99;
+    width: 100%;
+    height: 50px;
+    background-color: black;
+    /*border: 2px solid #ffffff;
+    font-family: 'Press Start 2P', cursive; */
+    font-size: 30px;
+    color: white;
+    }
+
+    #rtLeft {
+        width: 33.3%;
+        height: 50px;
+        background-color: black;
+        border: none;
+        
+
+    }
+
+    #mvForward {
+        width: 33.3%;
+        height: 50px;
+        background-color: black;
+        border: none;
+
+    }
+
+    #rtRight {
+        width: 33.3%;
+        height: 50px;
+        background-color: black;
+        border: none;
+
+    }
+
+   /* .btn {
+        position: absolute;
+        z-index: 99;
+        width: 100%;
+        height: 50px;
+        background-color: #555555;
+        border: 2px solid #ffffff;
+
+    }*/
+
+    .not-user-selectable { 
+        -webkit-user-select: none; 
+        -webkit-touch-callout: none; 
+        -moz-user-select: none; 
+        -ms-user-select: none; 
+        user-select: none;    
+        color: white;
+      } 
 
 
 }

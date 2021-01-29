@@ -493,6 +493,7 @@ function setupWorld() {
 
     function process_touchstart(evt) {
         evt.preventDefault();
+        evt.stopImmediatePropagation();
         timer=setInterval(function(){
             camera.getWorldDirection( dir );
             camera.position.addScaledVector( dir, speed );
@@ -502,6 +503,7 @@ function setupWorld() {
 
     function rotateLeft(evt) { 
         evt.preventDefault();
+        evt.stopImmediatePropagation();
         timer=setInterval(function(){
             camera.rotation.y += Math.PI / 40;
         }, 100); 
@@ -509,6 +511,7 @@ function setupWorld() {
 
     function rotateRight(evt) { 
         evt.preventDefault();
+        evt.stopImmediatePropagation();
         timer=setInterval(function(){
             camera.rotation.y -= Math.PI / 40;
         }, 100);
@@ -516,17 +519,20 @@ function setupWorld() {
 
     function process_touchend(evt) {
         evt.preventDefault();
+        evt.stopImmediatePropagation();
         if (timer) clearInterval(timer)
 
     }
 
     function handleMove(evt) {
         evt.preventDefault();
+        evt.stopImmediatePropagation();
 
     }
 
     function handleCancel(evt) {
         evt.preventDefault();
+        evt.stopImmediatePropagation();
 
     }
 }
@@ -543,7 +549,9 @@ function setupWorld() {
     }
 
 
-    function moveForward() { 
+    function moveForward(evt) { 
+        evt.preventDefault();
+        evt.stopImmediatePropagation();
         timer=setInterval(function(){
             camera.getWorldDirection( dir );
             camera.position.addScaledVector( dir, speed );
