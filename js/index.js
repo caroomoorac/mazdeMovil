@@ -9,6 +9,27 @@ var speed = 3;
 var chaseCamera, topCamera;
 var player = new THREE.Object3D();
 var timer;
+var tex = new THREE.ImageUtils.loadTexture( 'img/loading.png' );
+var tex2 = new THREE.ImageUtils.loadTexture( 'img/wait.png' );
+
+
+var loadingScreen = {
+    scene: new THREE.Scene(),
+    camera: new THREE.PerspectiveCamera(90, 1280/70, 0.1, 100),
+    box: new THREE.Mesh(
+        new THREE.BoxGeometry(120, 1, 1),
+        new THREE.MeshBasicMaterial({ map: tex})
+    )
+   /* box2: new THREE.Mesh(
+        new THREE.BoxGeometry(180, 1),
+        new THREE.MeshBasicMaterial({ map: tex2})
+    )*/
+};
+
+
+var RESOURCES_LOADED = false;
+var LOADING_MANAGER = null;
+
 
 
 
@@ -26,6 +47,24 @@ function setupWorld() {
     $container = $('#main-container');
     scene = new THREE.Scene();
     //scene.background = new THREE.Color('#ffffff');
+
+    loadingScreen.box.position.set(0,0,-5);
+   /* loadingScreen.box2.position.set(0,-2,-8);
+    loadingScreen.scene.add(loadingScreen.box2);*/
+    loadingScreen.camera.lookAt(loadingScreen.box.position);
+    loadingScreen.scene.add(loadingScreen.box);
+    
+
+    loadingManager = new THREE.LoadingManager;
+    
+    loadingManager.onProgress = function (item, loaded, total) {
+        console.log(item, loaded, total);
+    }
+
+    loadingManager.onLoad = function () {
+        console.log("ITEMS LOADED");
+        RESOURCES_LOADED = true;
+    };
 
     scene.background = new THREE.CubeTextureLoader()
     .setPath( 'cubemap/' )
@@ -334,12 +373,12 @@ function setupWorld() {
 
 
 
-    var murakit = new THREE.MTLLoader();
+    var murakit = new THREE.MTLLoader(loadingManager);
     murakit.load("models/model/escritorio.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader();
+      var murakit = new THREE.OBJLoader(loadingManager);
       murakit.setMaterials(materials);
     
       murakit.load("models/model/escritorio.obj", function(mesh) {
@@ -348,12 +387,12 @@ function setupWorld() {
       });
     });
 
-    var murakit = new THREE.MTLLoader();
+    var murakit = new THREE.MTLLoader(loadingManager);
     murakit.load("models/model/mazde3.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader();
+      var murakit = new THREE.OBJLoader(loadingManager);
       murakit.setMaterials(materials);
     
       murakit.load("models/model/mazde3.obj", function(mesh) {
@@ -362,12 +401,12 @@ function setupWorld() {
       });
     });
 
-    var murakit = new THREE.MTLLoader();
+    var murakit = new THREE.MTLLoader(loadingManager);
     murakit.load("models/model/4.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader();
+      var murakit = new THREE.OBJLoader(loadingManager);
       murakit.setMaterials(materials);
     
       murakit.load("models/model/4.obj", function(mesh) {
@@ -376,12 +415,12 @@ function setupWorld() {
       });
     });
 
-    var murakit = new THREE.MTLLoader();
+    var murakit = new THREE.MTLLoader(loadingManager);
     murakit.load("models/model/5.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader();
+      var murakit = new THREE.OBJLoader(loadingManager);
       murakit.setMaterials(materials);
     
       murakit.load("models/model/5.obj", function(mesh) {
@@ -391,12 +430,12 @@ function setupWorld() {
     });
 
 
-    var murakit = new THREE.MTLLoader();
+    var murakit = new THREE.MTLLoader(loadingManager);
     murakit.load("models/model/6.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader();
+      var murakit = new THREE.OBJLoader(loadingManager);
       murakit.setMaterials(materials);
     
       murakit.load("models/model/6.obj", function(mesh) {
@@ -540,6 +579,13 @@ function setupWorld() {
 
 
     function animate() {
+        if (RESOURCES_LOADED == false){
+            requestAnimationFrame( animate );
+            loadingScreen.box.rotation.x += 0.009;
+            renderer.render(loadingScreen.scene, loadingScreen.camera);
+            return;
+        }
+
         //update();
         requestAnimationFrame( animate );
         //render();

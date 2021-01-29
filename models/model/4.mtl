@@ -28,7 +28,7 @@ illum 7
 
 newmtl st_wood
 Kd 0.9922000169754 0.98040002584457 0.89410001039505
-map_Kd models/mtl/Table IKEA Lidingbi round N140420
+map_Kd models/mtl/tica-dub.jpg
 Ks 0.62999999523163 0.62999999523163 0.62999999523163
 Ns 70
 illum 7
