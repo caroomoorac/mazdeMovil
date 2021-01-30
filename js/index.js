@@ -362,12 +362,12 @@ function setupWorld() {
     wall.receiveShadow = true;
     scene.add(wall);
 
-    var murakit = new THREE.MTLLoader(loadingManager);
+    var murakit = new THREE.MTLLoader();
     murakit.load("models/model/escritorio.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader(loadingManager);
+      var murakit = new THREE.OBJLoader();
       murakit.setMaterials(materials);
     
       murakit.load("models/model/escritorio.obj", function(mesh) {
@@ -377,12 +377,12 @@ function setupWorld() {
     });
 
 
-    var murakit = new THREE.MTLLoader();
+    var murakit = new THREE.MTLLoader(loadingManager);
     murakit.load("models/model/mazde3.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader();
+      var murakit = new THREE.OBJLoader(loadingManager);
       murakit.setMaterials(materials);
     
       murakit.load("models/model/mazde3.obj", function(mesh) {
@@ -405,12 +405,12 @@ function setupWorld() {
       });
     });
 
-    var murakit = new THREE.MTLLoader();
+    var murakit = new THREE.MTLLoader(loadingManager);
     murakit.load("models/model/5.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader();
+      var murakit = new THREE.OBJLoader(loadingManager);
       murakit.setMaterials(materials);
     
       murakit.load("models/model/5.obj", function(mesh) {
@@ -420,12 +420,12 @@ function setupWorld() {
     });
 
 
-    var murakit = new THREE.MTLLoader();
+    var murakit = new THREE.MTLLoader(loadingManager);
     murakit.load("models/model/6.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader();
+      var murakit = new THREE.OBJLoader(loadingManager);
       murakit.setMaterials(materials);
     
       murakit.load("models/model/6.obj", function(mesh) {
