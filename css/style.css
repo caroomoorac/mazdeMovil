@@ -234,7 +234,7 @@ ul li a { font-family: 'Press Start 2P', cursive; }
       #loading-screen {
         position: absolute;
         z-index: 99;
-        top: 75%;
+        top: 60%;
         left: 5%;
         background: none;
         /*background-color: red;
@@ -243,8 +243,8 @@ ul li a { font-family: 'Press Start 2P', cursive; }
         font-family: 'Press Start 2P', cursive;
         font-size: 8px;
         color: white;
-        opacity: 1;
-        transition: 1s opacity;
+        /*opacity: 1;
+        transition: 1s opacity;*/
     }
 
     #loading-screen.fade-out {

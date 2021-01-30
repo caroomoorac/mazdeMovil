@@ -362,11 +362,6 @@ function setupWorld() {
     wall.receiveShadow = true;
     scene.add(wall);
 
-
-
-
-
-
     var murakit = new THREE.MTLLoader(loadingManager);
     murakit.load("models/model/escritorio.mtl", function(materials) {
       materials.preload();
@@ -381,12 +376,13 @@ function setupWorld() {
       });
     });
 
-    var murakit = new THREE.MTLLoader(loadingManager);
+
+    var murakit = new THREE.MTLLoader();
     murakit.load("models/model/mazde3.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader(loadingManager);
+      var murakit = new THREE.OBJLoader();
       murakit.setMaterials(materials);
     
       murakit.load("models/model/mazde3.obj", function(mesh) {
@@ -395,12 +391,12 @@ function setupWorld() {
       });
     });
 
-    var murakit = new THREE.MTLLoader(loadingManager);
+    var murakit = new THREE.MTLLoader();
     murakit.load("models/model/4.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader(loadingManager);
+      var murakit = new THREE.OBJLoader();
       murakit.setMaterials(materials);
     
       murakit.load("models/model/4.obj", function(mesh) {
@@ -409,12 +405,12 @@ function setupWorld() {
       });
     });
 
-    var murakit = new THREE.MTLLoader(loadingManager);
+    var murakit = new THREE.MTLLoader();
     murakit.load("models/model/5.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader(loadingManager);
+      var murakit = new THREE.OBJLoader();
       murakit.setMaterials(materials);
     
       murakit.load("models/model/5.obj", function(mesh) {
@@ -424,12 +420,12 @@ function setupWorld() {
     });
 
 
-    var murakit = new THREE.MTLLoader(loadingManager);
+    var murakit = new THREE.MTLLoader();
     murakit.load("models/model/6.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader(loadingManager);
+      var murakit = new THREE.OBJLoader();
       murakit.setMaterials(materials);
     
       murakit.load("models/model/6.obj", function(mesh) {
@@ -437,6 +433,8 @@ function setupWorld() {
         
       });
     });
+
+
 
    /* var murakit = new THREE.MTLLoader();
     murakit.load("models/model/laCarniceriaMazDE.mtl", function(materials) {
@@ -577,7 +575,7 @@ function setupWorld() {
             requestAnimationFrame( animate );
             loadingManager.onProgress = function (item, loaded, total) {
             /*loadingScreen.innerHTML = (loaded / total * 100) + "%loaded";*/
-            loadingScreen.innerHTML = " Arte por: MazdeUno" + '<br>' + "Usa los botones de las flechas para moverte en el espacio" + "&#x0003C;" + "&#x02227;" + "&#x0003E;" + '<br>' + ((loaded / total * 100) + "% loaded") + '<br>' + "Loading:" + '<br>' + item, loaded, total;
+            loadingScreen.innerHTML = " Arte por: MazdeUno" + '<br>' + '<br>'+ "Usa los botones de las flechas para moverte en el espacio" + "&#x0003C;" + "&#x02227;" + "&#x0003E;" + '<br>' + '<br>' + ((loaded / total * 100) + "% loaded") + '<br>' + '<br>' + "Loading:" + '<br>' + item, loaded, total;
             console.log((loaded / total * 100) + "%loaded");
             /*loadingScreen.innerHTML = item, loaded, total;*/
         }
