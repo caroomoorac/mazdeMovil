@@ -521,6 +521,21 @@ function setupWorld() {
     document.getElementById("rtRight").addEventListener("touchmove", handleMove, false);
     document.getElementById("rtRight").addEventListener('touchend', process_touchend, false);
 
+    document.getElementById("main-container").addEventListener( 'touchstart', touchStartCanvas, false );
+    document.getElementById("main-container").addEventListener("touchcancel", handleCancel, false);
+    document.getElementById("main-container").addEventListener("touchmove", handleMove, false);
+    document.getElementById("main-container").addEventListener('touchend', handleCancel, false);
+
+
+    
+    document.getElementById("footer").addEventListener( 'touchstart', touchStartCanvas, false );
+    document.getElementById("footer").addEventListener("touchcancel", handleCancel, false);
+    document.getElementById("footer").addEventListener("touchmove", handleMove, false);
+    document.getElementById("footer").addEventListener('touchend', handleCancel, false);
+
+
+
+
 
     function process_touchstart(evt) {
         evt.preventDefault();
@@ -548,6 +563,11 @@ function setupWorld() {
         }, 100);
     }
 
+    function touchStartCanvas(evt) {
+        evt.preventDefault();
+        evt.stopImmediatePropagation();
+    }
+
     function process_touchend(evt) {
         evt.preventDefault();
         evt.stopImmediatePropagation();
@@ -558,6 +578,7 @@ function setupWorld() {
     function handleMove(evt) {
         evt.preventDefault();
         evt.stopImmediatePropagation();
+        if (timer) clearInterval(timer)
 
     }
 
