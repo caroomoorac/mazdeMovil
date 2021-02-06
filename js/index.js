@@ -543,7 +543,7 @@ function setupWorld() {
         timer=setInterval(function(){
             camera.getWorldDirection( dir );
             camera.position.addScaledVector( dir, speed );
-        }, 100); 
+        }, 70); 
         
     }
 
@@ -552,7 +552,7 @@ function setupWorld() {
         evt.stopImmediatePropagation();
         timer=setInterval(function(){
             camera.rotation.y += Math.PI / 40;
-        }, 100); 
+        }, 70); 
     }
 
     function rotateRight(evt) { 
@@ -560,7 +560,7 @@ function setupWorld() {
         evt.stopImmediatePropagation();
         timer=setInterval(function(){
             camera.rotation.y -= Math.PI / 40;
-        }, 100);
+        }, 70);
     }
 
     function touchStartCanvas(evt) {
