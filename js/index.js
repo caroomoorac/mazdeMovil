@@ -578,7 +578,6 @@ function setupWorld() {
     function handleMove(evt) {
         evt.preventDefault();
         evt.stopImmediatePropagation();
-        if (timer) clearInterval(timer)
 
     }
 
