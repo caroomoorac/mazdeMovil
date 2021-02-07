@@ -11,6 +11,9 @@ var player = new THREE.Object3D();
 var timer;
 var tex = new THREE.ImageUtils.loadTexture( 'img/loading.png' );
 var tex2 = new THREE.ImageUtils.loadTexture( 'img/wait.png' );
+var iterations = 0;
+var iterationsLeft = 0;
+var iterationsRight = 0;
 
 
 /*var loadingScreen = {
@@ -460,6 +463,7 @@ function setupWorld() {
     camera = new THREE.PerspectiveCamera(80, 1, 0.001, 10000);
     //camera.target = new THREE.Vector3(50, 50, 50);
     camera.position.set(60, 60, 60);
+    camera.rotation.y = Math.PI / 1.6;
     //camera.position.set(0, 300, 0);
     scene.add(camera);
 
@@ -540,9 +544,18 @@ function setupWorld() {
     function process_touchstart(evt) {
         evt.preventDefault();
         evt.stopImmediatePropagation();
+        iterations = 0;
         timer=setInterval(function(){
+            iterations++;
             camera.getWorldDirection( dir );
             camera.position.addScaledVector( dir, speed );
+            console.log(timer);
+            
+            if (iterations >= 70){
+            clearInterval(timer);
+            iterations = 0;
+            }
+
         }, 70); 
         
     }
@@ -550,16 +563,35 @@ function setupWorld() {
     function rotateLeft(evt) { 
         evt.preventDefault();
         evt.stopImmediatePropagation();
+        iterationsLeft = 0;
         timer=setInterval(function(){
+            iterationsLeft++;
             camera.rotation.y += Math.PI / 40;
+            console.log(timer);
+
+                        
+            if (iterationsLeft >= 70){
+                clearInterval(timer);
+                iterationsLeft = 0;
+                }
+
         }, 70); 
     }
 
     function rotateRight(evt) { 
         evt.preventDefault();
         evt.stopImmediatePropagation();
+        iterationsRight = 0;
         timer=setInterval(function(){
+            iterationsRight++;
             camera.rotation.y -= Math.PI / 40;
+            console.log(timer);
+
+            if (iterationsRight >= 70) {
+                clearInterval(timer);
+                iterationsRight = 0;
+            }
+
         }, 70);
     }
 
