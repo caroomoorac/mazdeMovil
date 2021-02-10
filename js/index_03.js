@@ -66,7 +66,7 @@ function setupWorld() {
 
 
     scene.background = new THREE.CubeTextureLoader()
-    .setPath( 'luisenzk/cubemap/' )
+    .setPath( 'italo/' )
     .load( [
         'redplanet_bk.jpg',
         'redplanet_ft.jpg',
@@ -290,7 +290,7 @@ function setupWorld() {
     renderer.setSize(width, height);
 
 
-    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    /*controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.rotateSpeed = 1.0;
     //controls.zoomSpeed = 0.2;
     controls.panSpeed = 0.8;
@@ -300,7 +300,7 @@ function setupWorld() {
     controls.target.set(0, 80, 20);
     camera.position.set(0,120,20);
     //camera.position.set(0,80,20);
-    //controls.update();
+    //controls.update();*/
 
     document.getElementById("mvForward").addEventListener( 'mousedown', moveForward );
     document.getElementById("mvForward").addEventListener("mouseup", function(){

@@ -15,6 +15,7 @@ var tex2 = new THREE.ImageUtils.loadTexture( 'img/wait.png' );
 var iterations = 0;
 var iterationsLeft = 0;
 var iterationsRight = 0;
+var player = new THREE.Object3D();
 
 
 /*var loadingScreen = {
@@ -463,8 +464,7 @@ function setupWorld() {
 
     camera = new THREE.PerspectiveCamera(80, 1, 0.001, 10000);
     //camera.target = new THREE.Vector3(50, 50, 50);
-    camera.position.set(60, 60, 60);
-    camera.rotation.y = Math.PI / 1.6;
+   // camera.rotation.y = Math.PI / 1.6;
     //camera.position.set(0, 300, 0);
     scene.add(camera);
 
@@ -492,14 +492,28 @@ function setupWorld() {
     controls.target.set(0, 80, 20);
     camera.position.set(0,120,20);
     //camera.position.set(0,80,20);
-    //controls.update();
+    //controls.update();*/
 
-   /* vrControls = new THREE.OrbitControls(camera, element);
-    vrControls.target.set(
-        camera.position.x,
-        camera.position.y,
-        camera.position.z
-    );*/
+    var player = new THREE.CubeGeometry(30, 30, 30);
+    player.position = camera.position;
+	player.rotation = camera.rotation;
+    
+   // var vector = new THREE.Vector3( 0, 0, - 1 );
+    var vector = new THREE.Vector3( 0, 0, -1 );
+    vector.applyQuaternion( camera.quaternion );
+
+
+   vrControls = new THREE.OrbitControls(camera, element);
+   vrControls.target.set(
+    camera.position.x,
+    camera.position.y,
+    camera.position.z
+);
+    camera.position.set(60, 60, 60);
+
+
+
+
 
 
   
@@ -515,7 +529,7 @@ function setupWorld() {
     document.getElementById("mvForward").addEventListener("touchmove", handleMove, false);
     document.getElementById("mvForward").addEventListener('touchend', process_touchend, false);
 
-    document.getElementById("rtLeft").addEventListener( 'touchstart', rotateLeft, false );
+    /*document.getElementById("rtLeft").addEventListener( 'touchstart', rotateLeft, false );
     document.getElementById("rtLeft").addEventListener("touchcancel", handleCancel, false);
     document.getElementById("rtLeft").addEventListener("touchmove", handleMove, false);
     document.getElementById("rtLeft").addEventListener('touchend', process_touchend, false);
@@ -524,7 +538,7 @@ function setupWorld() {
     document.getElementById("rtRight").addEventListener( 'touchstart', rotateRight, false );
     document.getElementById("rtRight").addEventListener("touchcancel", handleCancel, false);
     document.getElementById("rtRight").addEventListener("touchmove", handleMove, false);
-    document.getElementById("rtRight").addEventListener('touchend', process_touchend, false);
+    document.getElementById("rtRight").addEventListener('touchend', process_touchend, false);*/
 
     document.getElementById("main-container").addEventListener( 'touchstart', touchStartCanvas, false );
     document.getElementById("main-container").addEventListener("touchcancel", handleCancel, false);
@@ -546,11 +560,22 @@ function setupWorld() {
         evt.preventDefault();
         evt.stopImmediatePropagation();
         iterations = 0;
+
         timer=setInterval(function(){
+            
             iterations++;
             camera.getWorldDirection( dir );
             camera.position.addScaledVector( dir, speed );
             console.log(timer);
+
+            var vector = new THREE.Vector3( 0, 0, -1 );
+            vector.applyQuaternion( camera.quaternion );
+
+            vrControls.target.set(
+             camera.position.x,
+             camera.position.y,
+            camera.position.z - 1
+         );
             
             if (iterations >= 70){
             clearInterval(timer);
@@ -570,6 +595,15 @@ function setupWorld() {
             camera.rotation.y += Math.PI / 40;
             console.log(timer);
 
+
+                vrControls.target.set(
+                    player.position.x,
+                    player.position.y,
+                    player.position.z
+            );
+                
+
+
                         
             if (iterationsLeft >= 70){
                 clearInterval(timer);
@@ -587,6 +621,14 @@ function setupWorld() {
             iterationsRight++;
             camera.rotation.y -= Math.PI / 40;
             console.log(timer);
+
+
+            vrControls.target.set(
+                player.position.x,
+                player.position.y,
+                player.position.z
+            );
+
 
             if (iterationsRight >= 70) {
                 clearInterval(timer);
@@ -646,7 +688,9 @@ function setupWorld() {
         requestAnimationFrame( animate );
         //render();
         renderer.render( scene, camera );
-        //controls.update()
+        //vrControls.update();
+
+        
 
     }
 

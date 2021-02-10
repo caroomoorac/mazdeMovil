@@ -80,7 +80,7 @@ function setupWorld() {
 
     var floorMaterial = new THREE.MeshPhongMaterial({
         color: 0xFFFFFF,
-        opacity: 0.1,
+        opacity: 0.2,
         transparent: true,
         side: THREE.DoubleSide
     });
@@ -268,7 +268,7 @@ function setupWorld() {
     pointlight.position.x=20;
     scene.add( pointlight ); 
 
-    camera = new THREE.PerspectiveCamera(120, 1, 0.001, 10000);
+    camera = new THREE.PerspectiveCamera(80, 1, 0.001, 10000);
     //camera.target = new THREE.Vector3(50, 50, 50);
     camera.position.set(60, 60, 60);
     camera.rotation.y = Math.PI / 1.6;
