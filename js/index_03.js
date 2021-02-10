@@ -329,13 +329,6 @@ function setupWorld() {
     document.getElementById("main-container").addEventListener('touchend', handleCancel, false);
 
 
-    
-    document.getElementById("footer").addEventListener( 'touchstart', touchStartCanvas, false );
-    document.getElementById("footer").addEventListener("touchcancel", handleCancel, false);
-    document.getElementById("footer").addEventListener("touchmove", handleMove, false);
-    document.getElementById("footer").addEventListener('touchend', handleCancel, false);
-
-
 
 
 
@@ -343,6 +336,10 @@ function setupWorld() {
         evt.preventDefault();
         evt.stopImmediatePropagation();
         iterations = 0;
+        document.getElementById("rtLeft").disabled = true;
+        document.getElementById("rtLeft").disabled = true;
+
+
         timer=setInterval(function(){
             iterations++;
             camera.getWorldDirection( dir );
@@ -362,6 +359,9 @@ function setupWorld() {
         evt.preventDefault();
         evt.stopImmediatePropagation();
         iterationsLeft = 0;
+        document.getElementById("mvForward").disabled = true;
+        document.getElementById("mvForward").disabled = true;
+
         timer=setInterval(function(){
             iterationsLeft++;
             camera.rotation.y += Math.PI / 40;

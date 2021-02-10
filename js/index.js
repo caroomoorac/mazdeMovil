@@ -494,21 +494,12 @@ function setupWorld() {
     //camera.position.set(0,80,20);
     //controls.update();*/
 
-    var player = new THREE.CubeGeometry(30, 30, 30);
-    player.position = camera.position;
-	player.rotation = camera.rotation;
     
    // var vector = new THREE.Vector3( 0, 0, - 1 );
+   /* var vector = new THREE.Vector3( 0, 0, 0 );
+    vector.applyQuaternion( camera.quaternion );*/
     var vector = new THREE.Vector3( 0, 0, -1 );
     vector.applyQuaternion( camera.quaternion );
-
-
-   vrControls = new THREE.OrbitControls(camera, element);
-   vrControls.target.set(
-    camera.position.x,
-    camera.position.y,
-    camera.position.z
-);
     camera.position.set(60, 60, 60);
 
 
@@ -529,7 +520,7 @@ function setupWorld() {
     document.getElementById("mvForward").addEventListener("touchmove", handleMove, false);
     document.getElementById("mvForward").addEventListener('touchend', process_touchend, false);
 
-    /*document.getElementById("rtLeft").addEventListener( 'touchstart', rotateLeft, false );
+    document.getElementById("rtLeft").addEventListener( 'touchstart', rotateLeft, false );
     document.getElementById("rtLeft").addEventListener("touchcancel", handleCancel, false);
     document.getElementById("rtLeft").addEventListener("touchmove", handleMove, false);
     document.getElementById("rtLeft").addEventListener('touchend', process_touchend, false);
@@ -538,7 +529,7 @@ function setupWorld() {
     document.getElementById("rtRight").addEventListener( 'touchstart', rotateRight, false );
     document.getElementById("rtRight").addEventListener("touchcancel", handleCancel, false);
     document.getElementById("rtRight").addEventListener("touchmove", handleMove, false);
-    document.getElementById("rtRight").addEventListener('touchend', process_touchend, false);*/
+    document.getElementById("rtRight").addEventListener('touchend', process_touchend, false);
 
     document.getElementById("main-container").addEventListener( 'touchstart', touchStartCanvas, false );
     document.getElementById("main-container").addEventListener("touchcancel", handleCancel, false);
@@ -571,11 +562,9 @@ function setupWorld() {
             var vector = new THREE.Vector3( 0, 0, -1 );
             vector.applyQuaternion( camera.quaternion );
 
-            vrControls.target.set(
-             camera.position.x,
-             camera.position.y,
-            camera.position.z - 1
-         );
+            vrControls.target.set( 0, 0, 0 );
+
+
             
             if (iterations >= 70){
             clearInterval(timer);
@@ -689,6 +678,8 @@ function setupWorld() {
         //render();
         renderer.render( scene, camera );
         //vrControls.update();
+        var vector = new THREE.Vector3( 0, 0, -1 );
+        vector.applyQuaternion( camera.quaternion );
 
         
 
