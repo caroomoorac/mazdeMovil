@@ -65,7 +65,7 @@ function setupWorld() {
 
 
 
-    scene.background = new THREE.CubeTextureLoader()
+    scene.background = new THREE.CubeTextureLoader(loadingManager)
     .setPath( 'italo/' )
     .load( [
         'skybox1.jpg',
@@ -246,7 +246,7 @@ function setupWorld() {
 
 
 
-    var murakit = new THREE.MTLLoader(loadingManager);
+    /*var murakit = new THREE.MTLLoader(loadingManager);
     murakit.load("italo/models/computer.mtl", function(materials) {
       materials.preload();
       console.log(materials);
@@ -258,7 +258,7 @@ function setupWorld() {
       scene.add(mesh);
         
       });
-    });
+    });*/
 
 
     var light = new THREE.AmbientLight( 0xFFFFFF, 0.2 ); // soft white light
