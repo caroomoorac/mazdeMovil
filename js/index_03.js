@@ -7,7 +7,7 @@ var vrControls
 var controls;
 var clock = new THREE.Clock();
 var dir = new THREE.Vector3();
-var speed = 8;
+var speed = 3;
 var chaseCamera, topCamera;
 var player = new THREE.Object3D();
 var timer;
@@ -61,12 +61,8 @@ function setupWorld() {
     
 
     loadingManager = new THREE.LoadingManager;
-
-
-
-
     scene.background = new THREE.CubeTextureLoader()
-    .setPath( 'italo/' )
+    .setPath( 'luisenzk/cubemap/' )
     .load( [
         'redplanet_bk.jpg',
         'redplanet_ft.jpg',
@@ -78,39 +74,30 @@ function setupWorld() {
 
 
 
-    var floorMaterial = new THREE.MeshPhongMaterial({
-        color: 0xFFFFFF,
-        opacity: 0.1,
-        transparent: true,
-        side: THREE.DoubleSide
-    });
-    var floorGeometry = new THREE.CubeGeometry(500, 500, 500, 1);
+
+var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.jpg' );
+    floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
+    floorTexture.repeat.set( 1, 1 );
+    var floorMaterial = new THREE.MeshPhongMaterial( { map: floorTexture, side: THREE.DoubleSide, transparent:true } );
+    var floorGeometry = new THREE.PlaneGeometry(320, 190, 1, 1);
     var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-    floor.position.y = 170;
-    floor.position.z = 155;
-    floor.rotation.x = Math.PI / -2;
+    floor.position.y = 50;
+    floor.position.z = 10;
+    floor.position.x = -95;
+    floor.rotation.x = Math.PI / 2;
     floor.receiveShadow = true;
     scene.add(floor);
 
-
-
-    var wallTexture = new THREE.ImageUtils.loadTexture( 'italo/lake.jpg' );
-    wallTexture.wrapS = wallTexture.wrapT = THREE.RepeatWrapping; 
-    wallTexture.repeat.set( 1, 1 );
-    var floorMaterial = new THREE.MeshPhongMaterial({
-        map: wallTexture,
-        color: 0xFFFFFF,
-        opacity: 0.7,
-        bumpmap: wallTexture,
-        shininess: 150,
-        transparent: true,
-        side: THREE.DoubleSide
-    });
-    var floorGeometry = new THREE.PlaneGeometry(500, 750, 1, 1);
+    var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.jpg' );
+    floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
+    floorTexture.repeat.set( 1, 1 );
+    var floorMaterial = new THREE.MeshPhongMaterial( { map: floorTexture, side: THREE.DoubleSide, transparent:true } );
+    var floorGeometry = new THREE.PlaneGeometry(120, 200, 1, 1);
     var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-    floor.position.y = -75;
-    floor.position.z = 780;
-    floor.rotation.x = Math.PI / -2;
+    floor.position.y = 50;
+    floor.position.z = -180;
+    floor.position.x = -70;
+    floor.rotation.x = Math.PI / 2;
     floor.receiveShadow = true;
     scene.add(floor);
     
@@ -247,26 +234,38 @@ function setupWorld() {
 
 
     var murakit = new THREE.MTLLoader(loadingManager);
-    murakit.load("italo/models/computer.mtl", function(materials) {
+    murakit.load("luisenzk/models/pruebaCel.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
       var murakit = new THREE.OBJLoader(loadingManager);
       murakit.setMaterials(materials);
     
-      murakit.load("italo/models/computer.obj", function(mesh) {
+      murakit.load("luisenzk/models/pruebaCel.obj", function(mesh) {
       scene.add(mesh);
         
       });
     });
 
 
-    var light = new THREE.AmbientLight( 0xFFFFFF, 0.2 ); // soft white light
+    var lightH = new THREE.HemisphereLight( 0xFFC3EA, 1 ); // soft white light
+    scene.add( lightH );
+
+    const light = new THREE.PointLight( 0xFFC3EA, 4, 100 );
+    light.position.set( -150, 50, 0 );
     scene.add( light );
-    var pointlight = new THREE.HemisphereLight( 0xFFFFFF ); // soft white light
-   // pointlight.position.y=20;
-    pointlight.position.x=20;
-    scene.add( pointlight ); 
+
+    const lightPoint = new THREE.PointLight( 0xFFC3EA, 4, 100 );
+    lightPoint.position.set( -20, 50, -30 );
+    scene.add( lightPoint );
+
+    const lightPointTwo = new THREE.PointLight( 0xFFC3EA, 4, 100 );
+    lightPointTwo.position.set( -100, 50, -160 );
+    scene.add( lightPointTwo );
+
+
+    var lightAmbient = new THREE.AmbientLight( 0xFFFFFF, 1 ); // soft white light
+    //scene.add( lightAmbient );
 
     camera = new THREE.PerspectiveCamera(120, 1, 0.001, 10000);
     //camera.target = new THREE.Vector3(50, 50, 50);
