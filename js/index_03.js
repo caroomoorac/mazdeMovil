@@ -277,6 +277,66 @@ var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.j
       });
     });
 
+    var murakit = new THREE.MTLLoader(loadingManager);
+    murakit.load("luisenzk/models/4.mtl", function(materials) {
+      materials.preload();
+      console.log(materials);
+    
+      var murakit = new THREE.OBJLoader(loadingManager);
+      murakit.setMaterials(materials);
+    
+      murakit.load("luisenzk/models/4.obj", function(mesh) {
+      scene.add(mesh);
+        
+      });
+    });
+
+    var murakit = new THREE.MTLLoader(loadingManager);
+    murakit.load("luisenzk/models/5.mtl", function(materials) {
+      materials.preload();
+      console.log(materials);
+    
+      var murakit = new THREE.OBJLoader(loadingManager);
+      murakit.setMaterials(materials);
+    
+      murakit.load("luisenzk/models/5.obj", function(mesh) {
+      scene.add(mesh);
+        
+      });
+    });
+
+    var murakit = new THREE.MTLLoader(loadingManager);
+    murakit.load("luisenzk/models/6.mtl", function(materials) {
+      materials.preload();
+      console.log(materials);
+    
+      var murakit = new THREE.OBJLoader(loadingManager);
+      murakit.setMaterials(materials);
+    
+      murakit.load("luisenzk/models/6.obj", function(mesh) {
+      scene.add(mesh);
+        
+      });
+    });
+
+    var murakit = new THREE.MTLLoader(loadingManager);
+    murakit.load("luisenzk/models/7.mtl", function(materials) {
+      materials.preload();
+      console.log(materials);
+    
+      var murakit = new THREE.OBJLoader(loadingManager);
+      murakit.setMaterials(materials);
+    
+      murakit.load("luisenzk/models/7.obj", function(mesh) {
+      scene.add(mesh);
+        
+      });
+    });
+
+
+
+
+
 
     var lightH = new THREE.HemisphereLight( 0xFFC3EA, 1 ); // soft white light
     scene.add( lightH );
