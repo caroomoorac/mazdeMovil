@@ -234,14 +234,44 @@ var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.j
 
 
     var murakit = new THREE.MTLLoader(loadingManager);
-    murakit.load("luisenzk/models/pruebaCel.mtl", function(materials) {
+    murakit.load("luisenzk/models/1.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
       var murakit = new THREE.OBJLoader(loadingManager);
       murakit.setMaterials(materials);
     
-      murakit.load("luisenzk/models/pruebaCel.obj", function(mesh) {
+      murakit.load("luisenzk/models/1.obj", function(mesh) {
+      scene.add(mesh);
+        
+      });
+    });
+
+
+    var murakit = new THREE.MTLLoader(loadingManager);
+    murakit.load("luisenzk/models/2.mtl", function(materials) {
+      materials.preload();
+      console.log(materials);
+    
+      var murakit = new THREE.OBJLoader(loadingManager);
+      murakit.setMaterials(materials);
+    
+      murakit.load("luisenzk/models/2.obj", function(mesh) {
+      scene.add(mesh);
+        
+      });
+    });
+
+
+    var murakit = new THREE.MTLLoader(loadingManager);
+    murakit.load("luisenzk/models/3.mtl", function(materials) {
+      materials.preload();
+      console.log(materials);
+    
+      var murakit = new THREE.OBJLoader(loadingManager);
+      murakit.setMaterials(materials);
+    
+      murakit.load("luisenzk/models/3.obj", function(mesh) {
       scene.add(mesh);
         
       });
