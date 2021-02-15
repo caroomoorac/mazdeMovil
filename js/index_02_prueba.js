@@ -88,7 +88,7 @@ function setupWorld() {
     scene.add(floor);
     
 
-    var murakit = new THREE.MTLLoader(loadingManager);
+    /*var murakit = new THREE.MTLLoader(loadingManager);
     murakit.load("italo/models/computer.mtl", function(materials) {
       materials.preload();
       console.log(materials);
@@ -100,7 +100,7 @@ function setupWorld() {
       scene.add(mesh);
         
       });
-    });
+    });*/
 
 
     var light = new THREE.AmbientLight( 0xFFFFFF, 0.2 ); // soft white light
