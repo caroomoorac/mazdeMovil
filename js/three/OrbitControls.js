@@ -33,14 +33,14 @@ THREE.OrbitControls = function ( object, domElement ) {
 
   // "target" sets the location of focus, where the control orbits around
   // and where it pans with respect to.
-  this.target = new THREE.Vector3();
+  this.target = new THREE.Vector3( camera.position.x, camera.position.y, camera.position.z);
 
   // center is old, deprecated; use "target" instead
   this.center = this.target;
-
+  
   // This option actually enables dollying in and out; left as "zoom" for
   // backwards compatibility
-  this.noZoom = false;
+  this.noZoom = true;
   this.zoomSpeed = 1.0;
 
   // Limits to how far you can dolly in and out
@@ -64,6 +64,8 @@ THREE.OrbitControls = function ( object, domElement ) {
   this.minPolarAngle = 0; // radians
   this.maxPolarAngle = Math.PI; // radians
 
+  this.target0 = this.target.clone();
+  this.position0 = this.object.position.clone();
   // Set to true to disable use of the keys
   this.noKeys = false;
 
@@ -74,6 +76,8 @@ THREE.OrbitControls = function ( object, domElement ) {
   // internals
 
   var scope = this;
+
+  
 
   var EPS = 0.000001;
 

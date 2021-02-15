@@ -1,12 +1,19 @@
 ///////////////ITALO
 
+import * as THREE from '/js/lib/three.module.js';
+
+import { PointerLockControls } from '/js/ThreeJS_Pointerlockcontrols_Mobile.js';
+
 var scene, renderer;
 var stereoEffect;
 var camera;
 var vrControls
 var controls;
 var clock = new THREE.Clock();
-var dir = new THREE.Vector3();
+//var dir = new THREE.Vector3();
+var $container;
+var loadingManager;
+
 var speed = 8;
 var chaseCamera, topCamera;
 var player = new THREE.Object3D();
@@ -16,6 +23,32 @@ var tex2 = new THREE.ImageUtils.loadTexture( 'img/wait.png' );
 var iterations = 0;
 var iterationsLeft = 0;
 var iterationsRight = 0;
+var element;
+
+var width, height;
+var viewAngle = 45,
+	near = 1,
+	far = 10000;
+var aspect;
+var sceneObject, intersected;
+
+let prevTime = performance.now();
+
+
+const velocity = new THREE.Vector3();
+const direction = new THREE.Vector3();
+const vertex = new THREE.Vector3();
+let raycaster;
+
+
+let moveForward = false;
+let moveBackward = false;
+let moveLeft = false;
+let moveRight = false;
+let canJump = false;
+
+const objects = [];
+
 
 
 /*var loadingScreen = {
@@ -78,19 +111,19 @@ function setupWorld() {
 
 
 
-    var floorMaterial = new THREE.MeshPhongMaterial({
+    /*var floorMaterial = new THREE.MeshPhongMaterial({
         color: 0xFFFFFF,
         opacity: 0.2,
         transparent: true,
         side: THREE.DoubleSide
     });
     var floorGeometry = new THREE.CubeGeometry(500, 500, 500, 1);
-    var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-    floor.position.y = 170;
-    floor.position.z = 155;
-    floor.rotation.x = Math.PI / -2;
-    floor.receiveShadow = true;
-    scene.add(floor);
+    var sceneObject = new THREE.Mesh(floorGeometry, floorMaterial);
+    sceneObject.position.y = 170;
+    sceneObject.position.z = 155;
+    sceneObject.rotation.x = Math.PI / -2;
+    sceneObject.receiveShadow = true;
+    scene.add(sceneObject);*/
 
 
 
@@ -114,137 +147,6 @@ function setupWorld() {
     floor.receiveShadow = true;
     scene.add(floor);
     
-
-    /*var floorMaterial = new THREE.MeshPhongMaterial({
-        color: 0xFFFFFF,
-        opacity: 0.2,
-        transparent: true,
-        side: THREE.DoubleSide
-    });
-    var floorGeometry = new THREE.PlaneGeometry(500, 600, 1, 1);
-    var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-    floor.position.y = 415;
-    floor.position.z = 140;
-    floor.rotation.x = Math.PI / -2;
-    floor.receiveShadow = true;
-    scene.add(floor);
-
-    var floorMaterial = new THREE.MeshPhongMaterial({
-        color: 0xFFFFFF,
-        opacity: 0.2,
-        transparent: true,
-        side: THREE.DoubleSide
-    });
-    var floorGeometry = new THREE.PlaneGeometry(490, 492, 1, 1);
-    var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-    floor.position.y = 170;
-    floor.position.z = -156;
-    floor.rotation.z = Math.PI / 2;
-    floor.receiveShadow = true;
-    scene.add(floor);
-
-
-    var wallMaterial =  new THREE.MeshPhongMaterial({
-        color: 0xFFFFFF,
-        opacity: 0.2,
-        transparent: true,
-        side: THREE.DoubleSide
-    });
-    var wallGeometry = new THREE.PlaneGeometry(600, 490, 1, 1);
-    var wall = new THREE.Mesh(wallGeometry, wallMaterial);
-    wall.position.y = 171;
-    wall.position.z = 140;
-    wall.position.x = 248;
-    wall.rotation.y = Math.PI / 2;
-    wall.receiveShadow = true;
-    scene.add(wall);
-
-    var wallMaterial =  new THREE.MeshPhongMaterial({
-        color: 0xFFFFFF,
-        opacity: 0.2,
-        transparent: true,
-        side: THREE.DoubleSide
-    });
-    var wallGeometry = new THREE.PlaneGeometry(600, 490, 1, 1);
-    var wall = new THREE.Mesh(wallGeometry, wallMaterial);
-    wall.position.y = 171;
-    wall.position.z = 140;
-    wall.position.x = -248;
-    wall.rotation.y = Math.PI / 2;
-    wall.receiveShadow = true;
-    scene.add(wall);
-
-    /*
-    var floorTexture = new THREE.ImageUtils.loadTexture( 'img/rafa_img/15.jpg' );
-    floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
-    floorTexture.repeat.set( 1, 1 );
-    var floorMaterial = new THREE.MeshPhongMaterial( { map: floorTexture, side: THREE.DoubleSide, transparent:true } );
-    var floorGeometry = new THREE.PlaneGeometry(250, 200, 1, 1);
-    var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-    floor.position.y = 50;
-    floor.position.z = 100;
-    floor.rotation.x = Math.PI / 2;
-    floor.receiveShadow = true;
-    scene.add(floor);
-
-    var wallTexture = new THREE.ImageUtils.loadTexture( 'img/rafa_img/11.jpg' );
-    wallTexture.wrapS = wallTexture.wrapT = THREE.RepeatWrapping; 
-    wallTexture.repeat.set( 1, 1 );
-    var wallMaterial = new THREE.MeshPhongMaterial( { map: wallTexture, side: THREE.DoubleSide, transparent:true } );
-    var wallGeometry = new THREE.PlaneGeometry(600, 400, 1, 1);
-    var wall = new THREE.Mesh(wallGeometry, wallMaterial);
-    wall.position.y = 240;
-    wall.position.z = 0;
-    wall.position.x = 248;
-    wall.rotation.y = Math.PI / 2;
-    wall.receiveShadow = true;
-    scene.add(wall);
-
-    var wallTexture = new THREE.ImageUtils.loadTexture( 'img/rafa_img/12.jpg' );
-    wallTexture.wrapS = wallTexture.wrapT = THREE.RepeatWrapping; 
-    wallTexture.repeat.set( 1, 1 );
-    var wallMaterial = new THREE.MeshPhongMaterial( { map: wallTexture, side: THREE.DoubleSide, transparent:true } );
-    var wallGeometry = new THREE.PlaneGeometry(600, 400, 1, 1);
-    var wall = new THREE.Mesh(wallGeometry, wallMaterial);
-    wall.position.y = 240;
-    wall.position.z = 0;
-    wall.position.x = -248;
-    wall.rotation.y = Math.PI / 2;
-    wall.receiveShadow = true;
-    scene.add(wall);
-
-
-
-    ////lados
-
-    var wallTexture = new THREE.ImageUtils.loadTexture( 'img/rafa_img/13.jpg' );
-    wallTexture.wrapS = wallTexture.wrapT = THREE.RepeatWrapping; 
-    wallTexture.repeat.set( 1, 1 );
-    var wallMaterial = new THREE.MeshPhongMaterial( { map: wallTexture, side: THREE.DoubleSide, transparent:true } );
-    var wallGeometry = new THREE.PlaneGeometry(500, 400, 1, 1);
-    var wall = new THREE.Mesh(wallGeometry, wallMaterial);
-    wall.position.y = 240;
-    wall.position.z = 300;
-    wall.position.x = 0;
-    wall.rotation.y = Math.PI / 1;
-    wall.receiveShadow = true;
-    scene.add(wall);
-
-    var wallTexture = new THREE.ImageUtils.loadTexture( 'img/rafa_img/14.jpg' );
-    wallTexture.wrapS = wallTexture.wrapT = THREE.RepeatWrapping; 
-    wallTexture.repeat.set( 1, 1 );
-    var wallMaterial = new THREE.MeshPhongMaterial( { map: wallTexture, side: THREE.DoubleSide, transparent:true } );
-    var wallGeometry = new THREE.PlaneGeometry(500, 400, 1, 1);
-    var wall = new THREE.Mesh(wallGeometry, wallMaterial);
-    wall.position.y = 240;
-    wall.position.z = -300;
-    wall.position.x = 0;
-    wall.rotation.y = Math.PI / 1;
-    wall.receiveShadow = true;
-    scene.add(wall);
-    */
-
-
 
     /*var murakit = new THREE.MTLLoader(loadingManager);
     murakit.load("italo/models/computer.mtl", function(materials) {
@@ -290,19 +192,91 @@ function setupWorld() {
     renderer.setSize(width, height);
 
 
-    /*controls = new THREE.OrbitControls(camera, renderer.domElement);
+    // Controls
+    /*var options = {
+        speedFactor: 0.5,
+        delta: 1,
+        rotationFactor: 0.002,
+        maxPitch: 90,
+        hitTest: true,
+        hitTestDistance: 40
+    };
+    
+    controls = new TouchControls($container.parent(), camera, options);
+    controls.setPosition(0, 35, 400);
+    controls.addToScene(scene);*/
+
+    //camera.clone();
+  //  camera.copy()
+
+
+
+    const dir = new THREE.Vector3();
+    camera.getWorldDirection(dir);
+   // dir.applyQuaternion( camera.quaternion );
+   // camera.position.add( dir );
+
+
+/*
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.rotateSpeed = 1.0;
+    controls.coupleCenters = true;
     //controls.zoomSpeed = 0.2;
     controls.panSpeed = 0.8;
-    controls.staticMoving = true;
-     controls.dynamicDampingFactor = 1;
+    //controls.staticMoving = true;
+    // controls.dynamicDampingFactor = 1;
     //controls.maxPolarAngle = Math.PI / 2.5;
-    controls.target.set(0, 80, 20);
-    camera.position.set(0,120,20);
+   // controls.target.set(camera.position.x + 1, camera.position.y, camera.position.z);
+    //camera.position.set(0,120,20);
     //camera.position.set(0,80,20);
     //controls.update();*/
+   // camera.getWorldDirection(controls.target);
+    // controls.target.addScaledVector(dir, speed);
+     //controls.update();  
+    
+    
+    /*vrControls = new THREE.OrbitControls(camera, element);
+    vrControls.target.set(
+      camera.position.x + 0.1,
+      camera.position.y,
+      camera.position.z
+    );*/
 
-    document.getElementById("mvForward").addEventListener( 'mousedown', moveForward );
+    /*controls = new THREE.TrackballControls( camera );
+    controls.target.set( 0, 0, 0 );*/
+
+    controls = new PointerLockControls( camera, document.body );
+
+    const blocker = document.getElementById( 'blocker' );
+    const instructions = document.getElementById( 'instructions' );
+
+    instructions.addEventListener( 'click', function () {
+
+        controls.lock();
+
+    }, false );
+
+    controls.addEventListener( 'lock', function () {
+
+        instructions.style.display = 'none';
+        blocker.style.display = 'none';
+
+    } );
+
+    controls.addEventListener( 'unlock', function () {
+
+        blocker.style.display = 'block';
+        instructions.style.display = '';
+
+    } );
+
+    scene.add( controls.getObject());
+
+    raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
+
+
+
+    //document.getElementById("mvForward").addEventListener( 'mousedown', moveForward );
     document.getElementById("mvForward").addEventListener("mouseup", function(){
         if (timer) clearInterval(timer)
     });
@@ -312,7 +286,7 @@ function setupWorld() {
     document.getElementById("mvForward").addEventListener("touchmove", handleMove, false);
     document.getElementById("mvForward").addEventListener('touchend', process_touchend, false);
 
-    document.getElementById("rtLeft").addEventListener( 'touchstart', rotateLeft, false );
+    /*document.getElementById("rtLeft").addEventListener( 'touchstart', rotateLeft, false );
     document.getElementById("rtLeft").addEventListener("touchcancel", handleCancel, false);
     document.getElementById("rtLeft").addEventListener("touchmove", handleMove, false);
     document.getElementById("rtLeft").addEventListener('touchend', process_touchend, false);
@@ -326,7 +300,7 @@ function setupWorld() {
     document.getElementById("main-container").addEventListener( 'touchstart', touchStartCanvas, false );
     document.getElementById("main-container").addEventListener("touchcancel", handleCancel, false);
     document.getElementById("main-container").addEventListener("touchmove", handleMove, false);
-    document.getElementById("main-container").addEventListener('touchend', handleCancel, false);
+    document.getElementById("main-container").addEventListener('touchend', handleCancel, false);*/
 
 
     
@@ -342,20 +316,45 @@ function setupWorld() {
     function process_touchstart(evt) {
         evt.preventDefault();
         evt.stopImmediatePropagation();
-        iterations = 0;
+        iterations = 0;        
+
+
+
         timer=setInterval(function(){
             iterations++;
-            camera.getWorldDirection( dir );
-            camera.position.addScaledVector( dir, speed );
-            console.log(timer);
+            var vector = new THREE.Vector3();
+
+            const direction = new THREE.Vector3(camera.position.x,camera.position.x, camera.position.x);
+            direction.applyQuaternion( camera.quaternion );
+            //camera.getWorldDirection(direction);
+            //vector.applyQuaternion( camera.quaternion );
+            camera.getWorldDirection( vector );
+            //vector.applyQuaternion( camera.quaternion );
+            camera.position.addScaledVector( vector, speed );
+            //controls.target.addScaledVector(direction, speed);
+
+            //camera.position.add( vector );
             
+
+            //console.log(timer);
+            //vector.applyQuaternion( camera.quaternion );
+            //camera.getWorldDirection( vector );
+            
+           //console.log(controls.target);
+
+
+          // controls.target.set(camera.position.x + 1, camera.position.y, camera.position.z);
+          // controls.update();
+
             if (iterations >= 70){
             clearInterval(timer);
             iterations = 0;
             }
-
         }, 70); 
-        
+
+        //controls.update();
+
+
     }
 
     function rotateLeft(evt) { 
@@ -417,10 +416,14 @@ function setupWorld() {
 
     }
 }
+
+
      
 
 
     function animate() {
+        requestAnimationFrame( animate );
+
         if (RESOURCES_LOADED == false){
             requestAnimationFrame( animate );
             loadingManager.onProgress = function (item, loaded, total) {
@@ -439,16 +442,50 @@ function setupWorld() {
             renderer.render(loadingScreen.scene, loadingScreen.camera);*/
             return;
         }
+
+        const time = performance.now();
+
+        raycaster.ray.origin.copy( controls.getObject().position );
+        raycaster.ray.origin.y -= 10;
+        const intersections = raycaster.intersectObjects( objects );
+        const onObject = intersections.length > 0;
+        const delta = ( time - prevTime ) / 1000;
+
+        velocity.x -= velocity.x * 10.0 * delta;
+        velocity.z -= velocity.z * 10.0 * delta;
+        velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
+        direction.z = Number( moveForward );
+        direction.x = Number( moveRight ) - Number( moveLeft );
+        direction.normalize(); // this ensures consistent movements in all directions
+
+        if ( moveForward || moveBackward ) velocity.z -= direction.z * 400.0 * delta;
+        if ( moveLeft || moveRight ) velocity.x -= direction.x * 400.0 * delta;
+
+        if ( onObject === true ) {
+            velocity.y = Math.max( 0, velocity.y );
+            canJump = true;
+        }
+
+        controls.moveRight( - velocity.x * delta );
+        controls.moveForward( - velocity.z * delta );
+        controls.getObject().position.y += ( velocity.y * delta );
+        if ( controls.getObject().position.y < 10 ) {
+            velocity.y = 0;
+            controls.getObject().position.y = 10;
+            canJump = true;
+        }
+
+        prevTime = time;
+
+
         //update();
-        requestAnimationFrame( animate );
         //render();
         renderer.render( scene, camera );
-        //controls.update()
 
     }
 
 
-    function moveForward(evt) { 
+    /*function moveForward(evt) { 
         evt.preventDefault();
         evt.stopImmediatePropagation();
         timer=setInterval(function(){
@@ -456,6 +493,6 @@ function setupWorld() {
             camera.position.addScaledVector( dir, speed );
         }, 100); // the above code is executed every 100 ms
         //camera.translateZ( -moveDistance );
-    }
+    }*/
 
 

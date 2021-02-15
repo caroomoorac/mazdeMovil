@@ -8,8 +8,11 @@
     <meta name="description" content="">
     <meta name="author" content="MURAC">
     <link rel="stylesheet" href="css/lib/normalize.css">
+    <link rel="stylesheet" href="./css/touch-pad.css">
   <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/stylecontrols.css">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -19,11 +22,23 @@
   </head>
   <body>
     <div id="main-container">
-      <div id="buttons" class="btn-group btn-group-justified">
-        <button class="not-user-selectable" type="button" id="rtLeft">&#x0003C;</button>
-        <button class="not-user-selectable" type="button" id="mvForward">	&#x02227;</button>
-        <button class="not-user-selectable" type="button" id="rtRight">&#x0003E;        </button>
+
+
+        <div id="blocker">
+
+          <div id="instructions">
+          </div>
+
+
+        </div>
+
     </div>
+
+    <div id="buttons" class="btn-group btn-group-justified">
+      <!--<button class="not-user-selectable" type="button" id="rtLeft">&#x0003C;</button>
+      <button class="not-user-selectable" type="button" id="rtRight">&#x0003E;        </button>-->
+      <button class="not-user-selectable" type="button" id="mvForward">	&#x02227;</button>
+     
 
     <div id="loading-screen"></div>
 
@@ -43,7 +58,13 @@
     <script src="js/three/DeviceOrientationControls.js"></script>
     <script src="js/three/OrbitControls.js"></script>
     <script src="js/three/TrackballControls.js"></script>
-    <script src="js/index_03.js"></script>
+    <script type="text/javascript" src="js/rotation-pad.js"></script>
+    <script type="text/javascript" src="js/touch-controls.js"></script>
+    <script type="text/javascript" src="js/movement-pad.js"></script>
+    <script type="module" src="js/ThreeJS_Pointerlockcontrols_Mobile.js"></script>
+
+    <script type="module"  src="js/index_02.js"></script>
+
 
     <nav class="navbar navbar-expand-md navbar-dark " >
       <a class="navbar-brand" href="#">
