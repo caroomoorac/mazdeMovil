@@ -2,69 +2,19 @@
 
 
 var scene, renderer;
-var stereoEffect;
 var camera;
 var vrControls
 var controls;
 var clock = new THREE.Clock();
 //var dir = new THREE.Vector3();
-var loadingManager;
-
-var speed = 8;
-var chaseCamera, topCamera;
-var player = new THREE.Object3D();
-var timer;
-var tex = new THREE.ImageUtils.loadTexture( 'img/loading.png' );
-var tex2 = new THREE.ImageUtils.loadTexture( 'img/wait.png' );
-var iterations = 0;
-var iterationsLeft = 0;
-var iterationsRight = 0;
-var element;
-
 var width, height;
-var viewAngle = 45,
+var viewAngle = 120,
 	near = 1,
 	far = 10000;
 var aspect;
 var sceneObject, intersected;
-
-let prevTime = performance.now();
-
-
-const velocity = new THREE.Vector3();
-const direction = new THREE.Vector3();
-const vertex = new THREE.Vector3();
-let raycaster;
-
-
-let moveForward = false;
-let moveBackward = false;
-let moveLeft = false;
-let moveRight = false;
-let canJump = false;
-
-const objects = [];
-
-
-
-/*var loadingScreen = {
-    scene: new THREE.Scene(),
-    camera: new THREE.PerspectiveCamera(90, 1280/70, 0.1, 100),
-    box: new THREE.Mesh(
-        new THREE.BoxGeometry(120, 1, 1),
-        new THREE.MeshBasicMaterial({ map: tex})
-    )
-   /* box2: new THREE.Mesh(
-        new THREE.BoxGeometry(180, 1),
-        new THREE.MeshBasicMaterial({ map: tex2})
-    )
-};*/
-
-
 var RESOURCES_LOADED = false;
 var LOADING_MANAGER = null;
-
-
 var loadingScreen = document.getElementById( 'loading-screen' );
 
 setUp();
@@ -138,7 +88,7 @@ function setupWorld() {
     scene.add(floor);
     
 
-    /*var murakit = new THREE.MTLLoader(loadingManager);
+    var murakit = new THREE.MTLLoader(loadingManager);
     murakit.load("italo/models/computer.mtl", function(materials) {
       materials.preload();
       console.log(materials);
@@ -150,7 +100,7 @@ function setupWorld() {
       scene.add(mesh);
         
       });
-    });*/
+    });
 
 
     var light = new THREE.AmbientLight( 0xFFFFFF, 0.2 ); // soft white light
@@ -160,13 +110,13 @@ function setupWorld() {
     pointlight.position.x=20;
     scene.add( pointlight ); 
 
-    camera = new THREE.PerspectiveCamera(80, 1, 0.001, 10000);
+   /* camera = new THREE.PerspectiveCamera(80, 1, 0.001, 10000);
     //camera.target = new THREE.Vector3(50, 50, 50);
     camera.position.set(60, 60, 60);
-    camera.rotation.y = Math.PI / 1.6;
+    camera.rotation.y = Math.PI / 1.6;*/
 
     //camera.position.set(0, 300, 0);
-    scene.add(camera);
+   //scene.add(camera);
 
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerHeight,window.innerWidth);
@@ -175,18 +125,19 @@ function setupWorld() {
     element = renderer.domElement;
     $container.append(element);
 
+
+
+    camera = new THREE.PerspectiveCamera(viewAngle, aspect, near, far);
     var width  = $container.width();
     var height = $container.height();
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
-
-
     // Controls
     var options = {
         speedFactor: 0.5,
         delta: 1,
-        rotationFactor: 0.002,
+        rotationFactor: 0.003,
         maxPitch: 90,
         hitTest: true,
         hitTestDistance: 40
@@ -201,8 +152,8 @@ function setupWorld() {
 
 
 
-    const dir = new THREE.Vector3();
-    camera.getWorldDirection(dir);
+    //const dir = new THREE.Vector3();
+    //camera.getWorldDirection(dir);
    // dir.applyQuaternion( camera.quaternion );
    // camera.position.add( dir );
 
@@ -380,27 +331,14 @@ function setupWorld() {
 
 
     function animate() {
-        requestAnimationFrame( animate );
+        controls.update();
+
+
         var vector = new THREE.Vector3(controls.mouse.x, controls.mouse.y, 1);
         vector.unproject(camera);
+        requestAnimationFrame( animate );
 
-        if (RESOURCES_LOADED == false){
-            requestAnimationFrame( animate );
-            loadingManager.onProgress = function (item, loaded, total) {
-            /*loadingScreen.innerHTML = (loaded / total * 100) + "%loaded";*/
-            loadingScreen.innerHTML = " Arte por: MazdeUno" + '<br>' + '<br>'+ "Usa los botones de las flechas para moverte en el espacio" + "&#x0003C;" + "&#x02227;" + "&#x0003E;" + '<br>' + '<br>' + ((loaded / total * 100) + "% loaded") + '<br>' + '<br>' + "Loading:" + '<br>' + item, loaded, total;
-            console.log((loaded / total * 100) + "%loaded");
-            /*loadingScreen.innerHTML = item, loaded, total;*/
-        }
 
-        loadingManager.onLoad = function () {
-            loadingScreen.remove();
-            console.log("ITEMS LOADED");
-            RESOURCES_LOADED = true;
-        }
-           /* loadingScreen.box.rotation.x += 0.009;
-            renderer.render(loadingScreen.scene, loadingScreen.camera);*/
-        }
 
         //update();
         //render();
@@ -417,6 +355,29 @@ function setupWorld() {
             camera.position.addScaledVector( dir, speed );
         }, 100); // the above code is executed every 100 ms
         //camera.translateZ( -moveDistance );
+
+
+
+
+        
     }*/
 
 
+
+  /*  if (RESOURCES_LOADED == false){
+        requestAnimationFrame( animate );
+        loadingManager.onProgress = function (item, loaded, total) {
+        loadingScreen.innerHTML = (loaded / total * 100) + "%loaded";
+        loadingScreen.innerHTML = " Arte por: MazdeUno" + '<br>' + '<br>'+ "Usa los botones de las flechas para moverte en el espacio" + "&#x0003C;" + "&#x02227;" + "&#x0003E;" + '<br>' + '<br>' + ((loaded / total * 100) + "% loaded") + '<br>' + '<br>' + "Loading:" + '<br>' + item, loaded, total;
+        console.log((loaded / total * 100) + "%loaded");
+        loadingScreen.innerHTML = item, loaded, total;
+    }
+
+    loadingManager.onLoad = function () {
+        loadingScreen.remove();
+        console.log("ITEMS LOADED");
+        RESOURCES_LOADED = true;
+    }
+        loadingScreen.box.rotation.x += 0.009;
+        renderer.render(loadingScreen.scene, loadingScreen.camera);*/
+    

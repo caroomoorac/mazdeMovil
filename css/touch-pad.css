@@ -1,5 +1,6 @@
 .rotation-pad {
 	position: absolute;
+	margin-top: -10%;
 }
 
 .rotation-pad .region {
@@ -35,6 +36,8 @@
 
 .movement-pad {
 	position: absolute;
+	margin-top: -10%;
+
 }
 
 .movement-pad .region {
