@@ -1,8 +1,8 @@
 ///////////////ITALO
 
-import * as THREE from '/js/lib/three.module.js';
+import * as THREE from './lib/three.module.js';
 
-import { PointerLockControls } from '/js/ThreeJS_Pointerlockcontrols_Mobile.js';
+import { PointerLockControls } from '././ThreeJS_Pointerlockcontrols_Mobile.js';
 
 var scene, renderer;
 var stereoEffect;
