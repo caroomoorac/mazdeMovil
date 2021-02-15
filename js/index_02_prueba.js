@@ -36,7 +36,9 @@ function setupWorld() {
     loadingScreen.scene.add(loadingScreen.box2);
     loadingScreen.camera.lookAt(loadingScreen.box.position);
     loadingScreen.scene.add(loadingScreen.box);*/
-    loadingManager = new THREE.LoadingManager;
+    //loadingManager = new THREE.LoadingManager;
+
+    
 
     scene.background = new THREE.CubeTextureLoader(loadingManager)
     .setPath( 'italo/' )
@@ -147,222 +149,32 @@ function setupWorld() {
     controls.setPosition(0, 35, 400);
     controls.addToScene(scene);
 
-    //camera.clone();
-  //  camera.copy()
+    document.getElementById("main-container").addEventListener( 'touchstart', process_touchstart, false );
+    document.getElementById("main-container").addEventListener("touchcancel", process_touchstart, false);
+    document.getElementById("main-container").addEventListener("touchmove", process_touchstart, false);
+    document.getElementById("main-container").addEventListener('touchend', process_touchstart, false);
 
-
-
-    //const dir = new THREE.Vector3();
-    //camera.getWorldDirection(dir);
-   // dir.applyQuaternion( camera.quaternion );
-   // camera.position.add( dir );
-
-
-/*
-    controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.rotateSpeed = 1.0;
-    controls.coupleCenters = true;
-    //controls.zoomSpeed = 0.2;
-    controls.panSpeed = 0.8;
-    //controls.staticMoving = true;
-    // controls.dynamicDampingFactor = 1;
-    //controls.maxPolarAngle = Math.PI / 2.5;
-   // controls.target.set(camera.position.x + 1, camera.position.y, camera.position.z);
-    //camera.position.set(0,120,20);
-    //camera.position.set(0,80,20);
-    //controls.update();*/
-   // camera.getWorldDirection(controls.target);
-    // controls.target.addScaledVector(dir, speed);
-     //controls.update();  
-    
-    
-    /*vrControls = new THREE.OrbitControls(camera, element);
-    vrControls.target.set(
-      camera.position.x + 0.1,
-      camera.position.y,
-      camera.position.z
-    );*/
-
-
-
-    //document.getElementById("mvForward").addEventListener( 'mousedown', moveForward );
-    /*document.getElementById("mvForward").addEventListener("mouseup", function(){
-        if (timer) clearInterval(timer)
-    });
-
-    document.getElementById("mvForward").addEventListener('touchstart', process_touchstart, false);
-    document.getElementById("mvForward").addEventListener("touchcancel", handleCancel, false);
-    document.getElementById("mvForward").addEventListener("touchmove", handleMove, false);
-    document.getElementById("mvForward").addEventListener('touchend', process_touchend, false);
-
-    document.getElementById("rtLeft").addEventListener( 'touchstart', rotateLeft, false );
-    document.getElementById("rtLeft").addEventListener("touchcancel", handleCancel, false);
-    document.getElementById("rtLeft").addEventListener("touchmove", handleMove, false);
-    document.getElementById("rtLeft").addEventListener('touchend', process_touchend, false);
-
-
-    document.getElementById("rtRight").addEventListener( 'touchstart', rotateRight, false );
-    document.getElementById("rtRight").addEventListener("touchcancel", handleCancel, false);
-    document.getElementById("rtRight").addEventListener("touchmove", handleMove, false);
-    document.getElementById("rtRight").addEventListener('touchend', process_touchend, false);
-
-    document.getElementById("main-container").addEventListener( 'touchstart', touchStartCanvas, false );
-    document.getElementById("main-container").addEventListener("touchcancel", handleCancel, false);
-    document.getElementById("main-container").addEventListener("touchmove", handleMove, false);
-    document.getElementById("main-container").addEventListener('touchend', handleCancel, false);*/
-
-
-    
-    document.getElementById("footer").addEventListener( 'touchstart', touchStartCanvas, false );
-    document.getElementById("footer").addEventListener("touchcancel", handleCancel, false);
-    document.getElementById("footer").addEventListener("touchmove", handleMove, false);
-    document.getElementById("footer").addEventListener('touchend', handleCancel, false);
-
-
-
-
+    document.getElementById("footer").addEventListener( 'touchstart', process_touchstart, false );
+    document.getElementById("footer").addEventListener("touchcancel", process_touchstart, false);
+    document.getElementById("footer").addEventListener("touchmove", process_touchstart, false);
+    document.getElementById("footer").addEventListener('touchend', process_touchstart, false);
 
     function process_touchstart(evt) {
         evt.preventDefault();
         evt.stopImmediatePropagation();
-        iterations = 0;        
-
-
-
-        timer=setInterval(function(){
-            iterations++;
-            var vector = new THREE.Vector3();
-
-            const direction = new THREE.Vector3(camera.position.x,camera.position.x, camera.position.x);
-            direction.applyQuaternion( camera.quaternion );
-            //camera.getWorldDirection(direction);
-            //vector.applyQuaternion( camera.quaternion );
-            camera.getWorldDirection( vector );
-            //vector.applyQuaternion( camera.quaternion );
-            camera.position.addScaledVector( vector, speed );
-            //controls.target.addScaledVector(direction, speed);
-
-            //camera.position.add( vector );
-            
-
-            //console.log(timer);
-            //vector.applyQuaternion( camera.quaternion );
-            //camera.getWorldDirection( vector );
-            
-           //console.log(controls.target);
-
-
-          // controls.target.set(camera.position.x + 1, camera.position.y, camera.position.z);
-          // controls.update();
-
-            if (iterations >= 70){
-            clearInterval(timer);
-            iterations = 0;
-            }
-        }, 70); 
-
-        //controls.update();
-
-
     }
 
-    function rotateLeft(evt) { 
-        evt.preventDefault();
-        evt.stopImmediatePropagation();
-        iterationsLeft = 0;
-        timer=setInterval(function(){
-            iterationsLeft++;
-            camera.rotation.y += Math.PI / 40;
-            console.log(timer);
-
-                        
-            if (iterationsLeft >= 70){
-                clearInterval(timer);
-                iterationsLeft = 0;
-                }
-
-        }, 70); 
-    }
-
-    function rotateRight(evt) { 
-        evt.preventDefault();
-        evt.stopImmediatePropagation();
-        iterationsRight = 0;
-        timer=setInterval(function(){
-            iterationsRight++;
-            camera.rotation.y -= Math.PI / 40;
-            console.log(timer);
-
-            if (iterationsRight >= 70) {
-                clearInterval(timer);
-                iterationsRight = 0;
-            }
-
-        }, 70);
-    }
-
-    function touchStartCanvas(evt) {
-        evt.preventDefault();
-        evt.stopImmediatePropagation();
-    }
-
-    function process_touchend(evt) {
-        evt.preventDefault();
-        evt.stopImmediatePropagation();
-        if (timer) clearInterval(timer)
-
-    }
-
-    function handleMove(evt) {
-        evt.preventDefault();
-        evt.stopImmediatePropagation();
-
-    }
-
-    function handleCancel(evt) {
-        evt.preventDefault();
-        evt.stopImmediatePropagation();
-
-    }
 }
-
-
-     
 
 
     function animate() {
         controls.update();
-
-
         var vector = new THREE.Vector3(controls.mouse.x, controls.mouse.y, 1);
         vector.unproject(camera);
         requestAnimationFrame( animate );
-
-
-
-        //update();
-        //render();
         renderer.render( scene, camera );
 
     }
-
-
-    /*function moveForward(evt) { 
-        evt.preventDefault();
-        evt.stopImmediatePropagation();
-        timer=setInterval(function(){
-            camera.getWorldDirection( dir );
-            camera.position.addScaledVector( dir, speed );
-        }, 100); // the above code is executed every 100 ms
-        //camera.translateZ( -moveDistance );
-
-
-
-
-        
-    }*/
-
-
 
   /*  if (RESOURCES_LOADED == false){
         requestAnimationFrame( animate );
