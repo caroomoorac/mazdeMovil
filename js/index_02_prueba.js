@@ -40,7 +40,7 @@ function setupWorld() {
 
     
 
-    scene.background = new THREE.CubeTextureLoader(loadingManager)
+    scene.background = new THREE.CubeTextureLoader()
     .setPath( 'italo/' )
     .load( [
         'skybox1.jpg',
