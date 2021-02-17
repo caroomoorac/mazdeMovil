@@ -38,6 +38,10 @@
 
     </div>
 
+
+    
+
+
     
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/three/three.js"></script>
@@ -52,6 +56,44 @@
     <script type="text/javascript" src="js/touch-controls.js"></script>
     <!--<script type="module" src="js/ThreeJS_Pointerlockcontrols_Mobile.js"></script>-->
     <script src="js/index_02_prueba.js"></script>
+
+    <script>
+      var links = [
+        'mazdeuno.html',
+        'brunaD.html',
+        'luisenzk.html',
+        'deculturalization.html'
+      ];
+
+        if (screen.width <= 500) {
+          randomlink();
+      }
+      
+      function randomlink(){
+        window.location=links[Math.floor(Math.random()*links.length)];
+      }  
+  </script>
+
+  <script>
+
+    var links = [
+      'desktopMazdeuno.html',
+      'desktopBruna.html',
+      'desktopLuisenzk.html',
+      'desktopMazdeuno.html',
+      'moves.html'
+
+
+    ];
+
+    function randomlink(){
+      window.location=links[Math.floor(Math.random()*links.length)];
+    }
+
+
+    randomlink();
+
+  </script>
 
 
     <nav class="navbar navbar-expand-md navbar-dark " >

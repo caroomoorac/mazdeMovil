@@ -88,27 +88,57 @@ function setupWorld() {
     floor.rotation.x = Math.PI / -2;
     floor.receiveShadow = true;
     scene.add(floor);
-    
 
-    /*var murakit = new THREE.MTLLoader(loadingManager);
+
+
+    const manager = new THREE.LoadingManager();
+    manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+        console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+    };
+    manager.onLoad = function ( ) {
+        loadingScreen.remove();
+        console.log( 'Loading complete!');
+    };
+    manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+        loadingScreen.innerHTML = (itemsLoaded / itemsTotal * 100) + "%loaded";
+        loadingScreen.innerHTML = " Arte por: MazdeUno" + '<br>' + '<br>'+ "Usa los botones de las flechas para moverte en el espacio" + "&#x0003C;" + "&#x02227;" + "&#x0003E;" + '<br>' + '<br>' + ((itemsLoaded / itemsTotal * 100) + "% loaded") + '<br>' + '<br>' + "Loading:" + '<br>' + url, itemsLoaded, itemsTotal;
+        console.log((itemsLoaded / itemsTotal * 100) + "%loaded");
+        //loadingScreen.innerHTML = item, itemsLoaded, itemsTotal;
+        console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+    };
+
+    manager.onError = function ( url ) {
+        console.log( 'There was an error loading ' + url );
+    };
+
+
+    var murakit = new THREE.MTLLoader(manager);
     murakit.load("italo/models/computer.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader(loadingManager);
+      var murakit = new THREE.OBJLoader(manager);
       murakit.setMaterials(materials);
     
       murakit.load("italo/models/computer.obj", function(mesh) {
       scene.add(mesh);
         
       });
-    });*/
+    });
+
+        //
 
 
-    var light = new THREE.AmbientLight( 0xFFFFFF, 0.2 ); // soft white light
+
+
+    var light = new THREE.SpotLight( 0xFFFFFF, 0.9 ); // soft white light
+    light.position.y=800;
+    light.position.z=1000;
+    scene.add( light.target );
     scene.add( light );
-    var pointlight = new THREE.HemisphereLight( 0xFFFFFF ); // soft white light
-   // pointlight.position.y=20;
+    
+    var pointlight = new THREE.HemisphereLight( 0xFFFFFF, 1 ); // soft white light
+    pointlight.position.y=20;
     pointlight.position.x=20;
     scene.add( pointlight ); 
 
@@ -176,20 +206,5 @@ function setupWorld() {
 
     }
 
-  /*  if (RESOURCES_LOADED == false){
-        requestAnimationFrame( animate );
-        loadingManager.onProgress = function (item, loaded, total) {
-        loadingScreen.innerHTML = (loaded / total * 100) + "%loaded";
-        loadingScreen.innerHTML = " Arte por: MazdeUno" + '<br>' + '<br>'+ "Usa los botones de las flechas para moverte en el espacio" + "&#x0003C;" + "&#x02227;" + "&#x0003E;" + '<br>' + '<br>' + ((loaded / total * 100) + "% loaded") + '<br>' + '<br>' + "Loading:" + '<br>' + item, loaded, total;
-        console.log((loaded / total * 100) + "%loaded");
-        loadingScreen.innerHTML = item, loaded, total;
-    }
-
-    loadingManager.onLoad = function () {
-        loadingScreen.remove();
-        console.log("ITEMS LOADED");
-        RESOURCES_LOADED = true;
-    }
-        loadingScreen.box.rotation.x += 0.009;
-        renderer.render(loadingScreen.scene, loadingScreen.camera);*/
+ 
     

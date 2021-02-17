@@ -1,0 +1,119 @@
+body {
+    background-color: black;
+}
+
+img {
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#imgs {
+    width: 100px;
+    height: 50px;
+    user-select: none;
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+
+
+ul li a { font-family: 'Press Start 2P', cursive; }
+
+
+#dark {
+    background-color: black;
+}
+
+.navbar { 
+    background-color: black;
+
+} 
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: none;
+    box-shadow: none;
+    
+}
+
+#unity {
+    width: 100%;
+    height: 90%;
+    position: absolute;
+    background-color: black;
+    top: 10%; left: 0%; bottom: 0; right: 0;
+    
+}
+
+h1 {
+    position: absolute;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    top: 95%; left: 10%; bottom: 120%; right: 0;
+    height: 300px;
+    border: white;
+
+}
+
+#size {
+    z-index: 99;
+    position: absolute;
+    font-size: 18px;
+
+}
+
+#two {
+    z-index: 99;
+    position: absolute;
+    font-size: 16px;
+    top: 105%; left: 10%; bottom: 0; right: 0;
+
+}
+
+
+.scroll { 
+    margin:4px, 4px; 
+    padding:4px; 
+    background-color: green; 
+    width: 100%; 
+    height: 90%;
+    overflow-x: hidden; 
+}
+
+
+
+#footerLogos{
+    position: absolute;
+    background-color: black;
+    width:100%;
+
+
+  }
+
+
+
+
+#text {
+    position: absolute;
+    margin-top: 150px;
+}
+
+
+
+
+#three {
+    width: 30%;
+    height: 90%;
+    position: fixed;
+    font-size: 18px;
+    top: 45%; left: 0%; bottom: 0; right: 0;
+
+}
+

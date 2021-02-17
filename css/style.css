@@ -1,3 +1,7 @@
+body {
+    background-color: black;
+}
+
 /*#buttons {
     position: absolute;
     width: 100%;
@@ -142,12 +146,53 @@ ul li a { font-family: 'Press Start 2P', cursive; }
 
 
 #text {
-    position: fixed;
+    position: absolute;
     margin-top: 150px;
 }
 
+.unity {
+    width: 100%;
+    height: 90%;
+    position: absolute;
+    background-color: black;
+    top: 10%; left: 0%; bottom: 0; right: 0;
+}
+
+h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
+    color: white;
+    top: 80%; left: -1%; bottom: 0; right: 0;
+
+}
+
+#size {
+    width: 30%;
+    height: 90%;
+    position: fixed;
+    font-size: 18px;
+    top: 30%; left: 0%; bottom: 0; right: 0;
+
+}
+
+#two {
+    width: 30%;
+    height: 90%;
+    position: fixed;
+    font-size: 18px;
+    top: 35%; left: 0%; bottom: 0; right: 0;
+
+}
 
 
+#three {
+    width: 30%;
+    height: 90%;
+    position: fixed;
+    font-size: 18px;
+    top: 45%; left: 0%; bottom: 0; right: 0;
+
+}
 
 @media screen and (min-width: 320px) {
   
@@ -156,6 +201,13 @@ ul li a { font-family: 'Press Start 2P', cursive; }
         width: 80px;
         height: 50px;
     }
+
+    #footer{
+        background-color: black;
+        margin-top:0px;
+        height:30px;
+      }
+    
 
 
 
@@ -233,12 +285,12 @@ ul li a { font-family: 'Press Start 2P', cursive; }
       #loading-screen {
         position: absolute;
         z-index: 99;
-        top: 60%;
-        left: 5%;
-        background: none;
-        /*background-color: red;
+        top: 10%;
+        left: 0%;
+        background: black;
+        /*background-color: red;*/
         width: 100%;
-        height: 100%;*/
+        height: 90%;
         font-family: 'Press Start 2P', cursive;
         font-size: 8px;
         color: white;
