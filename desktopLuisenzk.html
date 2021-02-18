@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" type="image/png" href="img/assets/1.jpg" />
+    <title>laCarnicería</title>
+    <meta name="description" content="">
+    <meta name="author" content="MURACkit">
+    <link rel="stylesheet" href="css/styleDesktop.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="mazdeune/TemplateData/favicon.ico">
+    <link rel="stylesheet" href="mazdeune/TemplateData/style.css">
+    <script src="mazdeune/TemplateData/UnityProgress.js"></script>  
+    <script src="luisenzk/Build/UnityLoader.js"></script>
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "luisenzk/Build/luisccarniceria.json", {onProgress: UnityProgress});
+    </script>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark " >
+      <a class="navbar-brand" href="#">
+        <img src="img/logocarniceria.jpg" width="180px">
+     </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a id="maz" class="nav-link" >mazdeUno</a>
+          </li>
+          <li class="nav-item">
+            <a id="luis" class="nav-link" >@luisenzk</a>
+          </li>
+          <li class="nav-item">
+            <a id="bruna" class="nav-link" >Bruna Denegri</a>
+          </li>    
+          <li class="nav-item">
+            <a id="julio" class="nav-link" >Julio Urbina</a>
+          </li>  
+          <li class="nav-item">
+            <a id="dec" class="nav-link">deculturalization</a>
+          </li>    
+        </ul>
+      </div>  
+    </nav>
+
+
+
+
+         <div id="unity" class="scroll">
+          <h1 id="size"></h1>
+          <h1 id="two"> Carne Fresca<br><br>arte por Luisenzk<br> <br> usa el cursor de tu mouse para rotar<br>
+          usa las flechas de tu teclado para moverte</h1>
+              <div class="webgl-content">
+                    <div id="gameContainer" style="width: 900px; height: 550px"></div>
+                    <div class="footer">
+              </div>
+            </div>
+         </div>
+
+       
+
+         <!--<h1 id="two"></h1>
+
+         <h1 id="three"></h1>-->
+
+
+      <div id="footerLogos"  class="fixed-bottom">
+        <img id="amil" src="img/5.jpg" width="150px"class="img-responsive" alt="..." style="margin-left: 15%;">
+        <img id="minister" src="img/tersr.png" width="110px" class="img-responsive" alt="..." style="margin-left: 18%;" >
+
+        <img id="terser" src="img/amil.jpg" width="110px" class="img-responsive" alt="..." style="margin-left: 23%;" >
+      </div>
+
+
+      <script>
+        document.getElementById("maz").href = "desktopMazdeuno.html";
+        document.getElementById("luis").href = "desktopLuisenzk.html";
+        document.getElementById("bruna").href = "desktopBruna.html";
+        document.getElementById("julio").href = "desktopJulio.html";
+        document.getElementById("dec").href = "desktopItalo.html";
+
+
+
+
+
+      </script>
+
+  
+    </body>
+</html>
