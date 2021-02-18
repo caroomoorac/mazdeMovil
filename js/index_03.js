@@ -1,42 +1,21 @@
 ///////////////LUISSSSENK
 
+
 var scene, renderer;
-var stereoEffect;
 var camera;
 var vrControls
 var controls;
 var clock = new THREE.Clock();
-var dir = new THREE.Vector3();
-var speed = 3;
-var chaseCamera, topCamera;
-var player = new THREE.Object3D();
-var timer;
-var tex = new THREE.ImageUtils.loadTexture( 'img/loading.png' );
-var tex2 = new THREE.ImageUtils.loadTexture( 'img/wait.png' );
-var iterations = 0;
-var iterationsLeft = 0;
-var iterationsRight = 0;
-
-
-/*var loadingScreen = {
-    scene: new THREE.Scene(),
-    camera: new THREE.PerspectiveCamera(90, 1280/70, 0.1, 100),
-    box: new THREE.Mesh(
-        new THREE.BoxGeometry(120, 1, 1),
-        new THREE.MeshBasicMaterial({ map: tex})
-    )
-   /* box2: new THREE.Mesh(
-        new THREE.BoxGeometry(180, 1),
-        new THREE.MeshBasicMaterial({ map: tex2})
-    )
-};*/
-
-
-var RESOURCES_LOADED = false;
-var LOADING_MANAGER = null;
-
+//var dir = new THREE.Vector3();
+var width, height;
+var viewAngle = 120,
+	near = 1,
+	far = 10000;
+var aspect;
+var sceneObject, intersected;
 
 var loadingScreen = document.getElementById( 'loading-screen' );
+
 
 setUp();
 
@@ -231,14 +210,34 @@ var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.j
     scene.add(wall);
     */
 
+   const manager = new THREE.LoadingManager();
+   manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+       console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+   };
+   manager.onLoad = function ( ) {
+       loadingScreen.remove();
+       console.log( 'Loading complete!');
+   };
+   manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+       loadingScreen.innerHTML = (itemsLoaded / itemsTotal * 100) + "%loaded";
+       loadingScreen.innerHTML = '<br>' + '<br>' + '<br>' + '<br>' +'<br>' +'<br>' +'<br>' + '&nbsp;' + '&nbsp;' + " Arte por: deculturalization" + '<br>' + '<br>'+ '<br>' + '<br>'+ '<br>' + '<br>' +  '<br>' + '<br>' +  '&nbsp;' + '&nbsp;' + '&nbsp;' + "UTILIZA EL CONTROL IZQUIERDO" + '<br>' + '&nbsp;' + '&nbsp;' +  " PARA MOVERTE EN EL ESPACIO" + '<br>' + '<br>' +   '&nbsp;' + '&nbsp;' + '&nbsp;' + "UTILIZA EL CONTROL DERECHO" + '<br>' + '&nbsp;' + '&nbsp;' +  " PARA ROTAR EN EL ESPACIO"  + '<br>' + '<br>' +  '<br>' + '<br>' +  '&nbsp;' + '&nbsp;' + '&nbsp;' + ((itemsLoaded / itemsTotal * 100) + "% loaded") + '<br>' + '<br>' +  '&nbsp;' + '&nbsp;' +  '&nbsp;' + "Loading:" + '<br>' +  '&nbsp;' + '&nbsp;' + '&nbsp;' +  url, itemsLoaded, itemsTotal;
+       console.log((itemsLoaded / itemsTotal * 100) + "%loaded");
+       //loadingScreen.innerHTML = item, itemsLoaded, itemsTotal;
+       console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+   };
+
+   manager.onError = function ( url ) {
+       console.log( 'There was an error loading ' + url );
+   };
 
 
-    var murakit = new THREE.MTLLoader(loadingManager);
+
+    var murakit = new THREE.MTLLoader(manager);
     murakit.load("luisenzk/models/1.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader(loadingManager);
+      var murakit = new THREE.OBJLoader(manager);
       murakit.setMaterials(materials);
     
       murakit.load("luisenzk/models/1.obj", function(mesh) {
@@ -248,12 +247,12 @@ var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.j
     });
 
 
-    var murakit = new THREE.MTLLoader(loadingManager);
+    var murakit = new THREE.MTLLoader(manager);
     murakit.load("luisenzk/models/2.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader(loadingManager);
+      var murakit = new THREE.OBJLoader(manager);
       murakit.setMaterials(materials);
     
       murakit.load("luisenzk/models/2.obj", function(mesh) {
@@ -263,12 +262,12 @@ var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.j
     });
 
 
-    var murakit = new THREE.MTLLoader(loadingManager);
+    var murakit = new THREE.MTLLoader(manager);
     murakit.load("luisenzk/models/3.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader(loadingManager);
+      var murakit = new THREE.OBJLoader(manager);
       murakit.setMaterials(materials);
     
       murakit.load("luisenzk/models/3.obj", function(mesh) {
@@ -277,12 +276,12 @@ var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.j
       });
     });
 
-    var murakit = new THREE.MTLLoader(loadingManager);
+    var murakit = new THREE.MTLLoader(manager);
     murakit.load("luisenzk/models/4.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader(loadingManager);
+      var murakit = new THREE.OBJLoader(manager);
       murakit.setMaterials(materials);
     
       murakit.load("luisenzk/models/4.obj", function(mesh) {
@@ -291,12 +290,12 @@ var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.j
       });
     });
 
-    var murakit = new THREE.MTLLoader(loadingManager);
+    var murakit = new THREE.MTLLoader(manager);
     murakit.load("luisenzk/models/5.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader(loadingManager);
+      var murakit = new THREE.OBJLoader(manager);
       murakit.setMaterials(materials);
     
       murakit.load("luisenzk/models/5.obj", function(mesh) {
@@ -305,12 +304,12 @@ var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.j
       });
     });
 
-    var murakit = new THREE.MTLLoader(loadingManager);
+    var murakit = new THREE.MTLLoader(manager);
     murakit.load("luisenzk/models/6.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader(loadingManager);
+      var murakit = new THREE.OBJLoader(manager);
       murakit.setMaterials(materials);
     
       murakit.load("luisenzk/models/6.obj", function(mesh) {
@@ -319,12 +318,12 @@ var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.j
       });
     });
 
-    var murakit = new THREE.MTLLoader(loadingManager);
+    var murakit = new THREE.MTLLoader(manager);
     murakit.load("luisenzk/models/7.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
-      var murakit = new THREE.OBJLoader(loadingManager);
+      var murakit = new THREE.OBJLoader(manager);
       murakit.setMaterials(materials);
     
       murakit.load("luisenzk/models/7.obj", function(mesh) {
@@ -332,11 +331,6 @@ var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.j
         
       });
     });
-
-
-
-
-
 
     var lightH = new THREE.HemisphereLight( 0xFFC3EA, 1 ); // soft white light
     scene.add( lightH );
@@ -354,17 +348,6 @@ var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.j
     scene.add( lightPointTwo );
 
 
-    var lightAmbient = new THREE.AmbientLight( 0xFFFFFF, 1 ); // soft white light
-    //scene.add( lightAmbient );
-
-    camera = new THREE.PerspectiveCamera(120, 1, 0.001, 10000);
-    //camera.target = new THREE.Vector3(50, 50, 50);
-    camera.position.set(60, 60, 60);
-    camera.rotation.y = Math.PI / 1.6;
-
-    //camera.position.set(0, 300, 0);
-    scene.add(camera);
-
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerHeight,window.innerWidth);
     document.body.appendChild(renderer.domElement);
@@ -372,179 +355,55 @@ var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.j
     element = renderer.domElement;
     $container.append(element);
 
+
+
+    camera = new THREE.PerspectiveCamera(viewAngle, aspect, near, far);
     var width  = $container.width();
     var height = $container.height();
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
+    // Controls
+    var options = {
+        speedFactor: 0.5,
+        delta: 1,
+        rotationFactor: 0.005,
+        maxPitch: 90,
+        hitTest: true,
+        hitTestDistance: 40
+    };
+    
+    controls = new TouchControls($container.parent(), camera, options);
+    controls.setPosition(0, 60, 0);
+    controls.addToScene(scene);
 
 
-    /*controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.rotateSpeed = 1.0;
-    //controls.zoomSpeed = 0.2;
-    controls.panSpeed = 0.8;
-    controls.staticMoving = true;
-     controls.dynamicDampingFactor = 1;
-    //controls.maxPolarAngle = Math.PI / 2.5;
-    controls.target.set(0, 80, 20);
-    camera.position.set(0,120,20);
-    //camera.position.set(0,80,20);
-    //controls.update();*/
+    document.getElementById("main-container").addEventListener( 'touchstart', process_touchstart, false );
+    document.getElementById("main-container").addEventListener("touchcancel", process_touchstart, false);
+    document.getElementById("main-container").addEventListener("touchmove", process_touchstart, false);
+    document.getElementById("main-container").addEventListener('touchend', process_touchstart, false);
 
-    document.getElementById("mvForward").addEventListener( 'mousedown', moveForward );
-    document.getElementById("mvForward").addEventListener("mouseup", function(){
-        if (timer) clearInterval(timer)
-    });
-
-    document.getElementById("mvForward").addEventListener('touchstart', process_touchstart, false);
-    document.getElementById("mvForward").addEventListener("touchcancel", handleCancel, false);
-    document.getElementById("mvForward").addEventListener("touchmove", handleMove, false);
-    document.getElementById("mvForward").addEventListener('touchend', process_touchend, false);
-
-    document.getElementById("rtLeft").addEventListener( 'touchstart', rotateLeft, false );
-    document.getElementById("rtLeft").addEventListener("touchcancel", handleCancel, false);
-    document.getElementById("rtLeft").addEventListener("touchmove", handleMove, false);
-    document.getElementById("rtLeft").addEventListener('touchend', process_touchend, false);
-
-
-    document.getElementById("rtRight").addEventListener( 'touchstart', rotateRight, false );
-    document.getElementById("rtRight").addEventListener("touchcancel", handleCancel, false);
-    document.getElementById("rtRight").addEventListener("touchmove", handleMove, false);
-    document.getElementById("rtRight").addEventListener('touchend', process_touchend, false);
-
-    document.getElementById("main-container").addEventListener( 'touchstart', touchStartCanvas, false );
-    document.getElementById("main-container").addEventListener("touchcancel", handleCancel, false);
-    document.getElementById("main-container").addEventListener("touchmove", handleMove, false);
-    document.getElementById("main-container").addEventListener('touchend', handleCancel, false);
-
-
-
-
+    document.getElementById("footer").addEventListener( 'touchstart', process_touchstart, false );
+    document.getElementById("footer").addEventListener("touchcancel", process_touchstart, false);
+    document.getElementById("footer").addEventListener("touchmove", process_touchstart, false);
+    document.getElementById("footer").addEventListener('touchend', process_touchstart, false);
 
     function process_touchstart(evt) {
         evt.preventDefault();
         evt.stopImmediatePropagation();
-        iterations = 0;
-        document.getElementById("rtLeft").disabled = true;
-        document.getElementById("rtLeft").disabled = true;
-
-
-        timer=setInterval(function(){
-            iterations++;
-            camera.getWorldDirection( dir );
-            camera.position.addScaledVector( dir, speed );
-            console.log(timer);
-            
-            if (iterations >= 70){
-            clearInterval(timer);
-            iterations = 0;
-            }
-
-        }, 70); 
-        
     }
 
-    function rotateLeft(evt) { 
-        evt.preventDefault();
-        evt.stopImmediatePropagation();
-        iterationsLeft = 0;
-        document.getElementById("mvForward").disabled = true;
-        document.getElementById("mvForward").disabled = true;
-
-        timer=setInterval(function(){
-            iterationsLeft++;
-            camera.rotation.y += Math.PI / 40;
-            console.log(timer);
-
-                        
-            if (iterationsLeft >= 70){
-                clearInterval(timer);
-                iterationsLeft = 0;
-                }
-
-        }, 70); 
-    }
-
-    function rotateRight(evt) { 
-        evt.preventDefault();
-        evt.stopImmediatePropagation();
-        iterationsRight = 0;
-        timer=setInterval(function(){
-            iterationsRight++;
-            camera.rotation.y -= Math.PI / 40;
-            console.log(timer);
-
-            if (iterationsRight >= 70) {
-                clearInterval(timer);
-                iterationsRight = 0;
-            }
-
-        }, 70);
-    }
-
-    function touchStartCanvas(evt) {
-        evt.preventDefault();
-        evt.stopImmediatePropagation();
-    }
-
-    function process_touchend(evt) {
-        evt.preventDefault();
-        evt.stopImmediatePropagation();
-        if (timer) clearInterval(timer)
-
-    }
-
-    function handleMove(evt) {
-        evt.preventDefault();
-        evt.stopImmediatePropagation();
-
-    }
-
-    function handleCancel(evt) {
-        evt.preventDefault();
-        evt.stopImmediatePropagation();
-
-    }
 }
-     
 
 
     function animate() {
-        if (RESOURCES_LOADED == false){
-            requestAnimationFrame( animate );
-            loadingManager.onProgress = function (item, loaded, total) {
-            /*loadingScreen.innerHTML = (loaded / total * 100) + "%loaded";*/
-            loadingScreen.innerHTML = " Arte por: MazdeUno" + '<br>' + '<br>'+ "Usa los botones de las flechas para moverte en el espacio" + "&#x0003C;" + "&#x02227;" + "&#x0003E;" + '<br>' + '<br>' + ((loaded / total * 100) + "% loaded") + '<br>' + '<br>' + "Loading:" + '<br>' + item, loaded, total;
-            console.log((loaded / total * 100) + "%loaded");
-            /*loadingScreen.innerHTML = item, loaded, total;*/
-        }
-
-        loadingManager.onLoad = function () {
-            loadingScreen.remove();
-            console.log("ITEMS LOADED");
-            RESOURCES_LOADED = true;
-        }
-           /* loadingScreen.box.rotation.x += 0.009;
-            renderer.render(loadingScreen.scene, loadingScreen.camera);*/
-            return;
-        }
-        //update();
+        controls.update();
+        var vector = new THREE.Vector3(controls.mouse.x, controls.mouse.y, 1);
+        vector.unproject(camera);
         requestAnimationFrame( animate );
-        //render();
         renderer.render( scene, camera );
-        //controls.update()
 
     }
 
-
-    function moveForward(evt) { 
-        evt.preventDefault();
-        evt.stopImmediatePropagation();
-        timer=setInterval(function(){
-            camera.getWorldDirection( dir );
-            camera.position.addScaledVector( dir, speed );
-        }, 100); // the above code is executed every 100 ms
-        //camera.translateZ( -moveDistance );
-    }
-
-
+ 
+    

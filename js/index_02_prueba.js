@@ -53,19 +53,87 @@ function setupWorld() {
 
 
 
-    /*var floorMaterial = new THREE.MeshPhongMaterial({
+    var floorMaterial = new THREE.MeshPhongMaterial({
         color: 0xFFFFFF,
         opacity: 0.2,
         transparent: true,
         side: THREE.DoubleSide
     });
-    var floorGeometry = new THREE.CubeGeometry(500, 500, 500, 1);
+    var floorGeometry = new THREE.PlaneGeometry(500, 500, 1);
     var sceneObject = new THREE.Mesh(floorGeometry, floorMaterial);
-    sceneObject.position.y = 170;
+    sceneObject.position.y = 420;
     sceneObject.position.z = 155;
     sceneObject.rotation.x = Math.PI / -2;
     sceneObject.receiveShadow = true;
-    scene.add(sceneObject);*/
+    scene.add(sceneObject);
+
+
+    var floorMaterial = new THREE.MeshPhongMaterial({
+        color: 0xFFFFFF,
+        opacity: 0.2,
+        transparent: true,
+        side: THREE.DoubleSide
+    });
+    var floorGeometry = new THREE.PlaneGeometry(503, 503, 1);
+    var sceneObject = new THREE.Mesh(floorGeometry, floorMaterial);
+    sceneObject.position.y = -70;
+    sceneObject.position.z = 155;
+    sceneObject.rotation.x = Math.PI / -2;
+    sceneObject.receiveShadow = true;
+    scene.add(sceneObject);
+
+
+    var floorMaterial = new THREE.MeshPhongMaterial({
+        color: 0xFFFFFF,
+        opacity: 0.2,
+        transparent: true,
+        side: THREE.DoubleSide
+    });
+    var floorGeometry = new THREE.PlaneGeometry(502, 502, 1);
+    var sceneObject = new THREE.Mesh(floorGeometry, floorMaterial);
+    sceneObject.position.y = 180;
+    sceneObject.position.z = -90;
+    sceneObject.rotation.z = Math.PI / -2;
+    sceneObject.receiveShadow = true;
+    scene.add(sceneObject);
+
+    var floorMaterial = new THREE.MeshPhongMaterial({
+        color: 0xFFFFFF,
+        opacity: 0.2,
+        transparent: true,
+        side: THREE.DoubleSide
+    });
+    var floorGeometry = new THREE.PlaneGeometry(512, 502, 1);
+    var sceneObject = new THREE.Mesh(floorGeometry, floorMaterial);
+    sceneObject.position.y = 180;
+    sceneObject.position.z = 150;
+    sceneObject.position.x = 250;
+    sceneObject.rotation.y = Math.PI / -2;
+    sceneObject.receiveShadow = true;
+    scene.add(sceneObject);
+
+    var floorMaterial = new THREE.MeshPhongMaterial({
+        color: 0xFFFFFF,
+        opacity: 0.2,
+        transparent: true,
+        side: THREE.DoubleSide
+    });
+    var floorGeometry = new THREE.PlaneGeometry(512, 502, 1);
+    var sceneObject = new THREE.Mesh(floorGeometry, floorMaterial);
+    sceneObject.position.y = 180;
+    sceneObject.position.z = 150;
+    sceneObject.position.x = -255;
+    sceneObject.rotation.y = Math.PI / -2;
+    sceneObject.receiveShadow = true;
+    scene.add(sceneObject);
+
+    
+
+    
+    
+
+    
+
 
 
 
@@ -101,7 +169,7 @@ function setupWorld() {
     };
     manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
         loadingScreen.innerHTML = (itemsLoaded / itemsTotal * 100) + "%loaded";
-        loadingScreen.innerHTML = " Arte por: MazdeUno" + '<br>' + '<br>'+ "Usa los botones de las flechas para moverte en el espacio" + "&#x0003C;" + "&#x02227;" + "&#x0003E;" + '<br>' + '<br>' + ((itemsLoaded / itemsTotal * 100) + "% loaded") + '<br>' + '<br>' + "Loading:" + '<br>' + url, itemsLoaded, itemsTotal;
+        loadingScreen.innerHTML = '<br>' + '<br>' + '<br>' + '<br>' +'<br>' +'<br>' +'<br>' + '&nbsp;' + '&nbsp;' + " Arte por: deculturalization" + '<br>' + '<br>'+ '<br>' + '<br>'+ '<br>' + '<br>' +  '<br>' + '<br>' +  '&nbsp;' + '&nbsp;' + '&nbsp;' + "UTILIZA EL CONTROL IZQUIERDO" + '<br>' + '&nbsp;' + '&nbsp;' +  " PARA MOVERTE EN EL ESPACIO" + '<br>' + '<br>' +   '&nbsp;' + '&nbsp;' + '&nbsp;' + "UTILIZA EL CONTROL DERECHO" + '<br>' + '&nbsp;' + '&nbsp;' +  " PARA ROTAR EN EL ESPACIO"  + '<br>' + '<br>' +  '<br>' + '<br>' +  '&nbsp;' + '&nbsp;' + '&nbsp;' + ((itemsLoaded / itemsTotal * 100) + "% loaded") + '<br>' + '<br>' +  '&nbsp;' + '&nbsp;' +  '&nbsp;' + "Loading:" + '<br>' +  '&nbsp;' + '&nbsp;' + '&nbsp;' +  url, itemsLoaded, itemsTotal;
         console.log((itemsLoaded / itemsTotal * 100) + "%loaded");
         //loadingScreen.innerHTML = item, itemsLoaded, itemsTotal;
         console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
@@ -178,6 +246,18 @@ function setupWorld() {
     controls = new TouchControls($container.parent(), camera, options);
     controls.setPosition(0, 35, 400);
     controls.addToScene(scene);
+
+   /* controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.rotateSpeed = 1.0;
+    //controls.zoomSpeed = 0.2;
+    controls.panSpeed = 0.8;
+    controls.staticMoving = true;
+     controls.dynamicDampingFactor = 1;
+    //controls.maxPolarAngle = Math.PI / 2.5;
+    controls.target.set(0, 80, 20);
+    camera.position.set(0,120,20);
+    //camera.position.set(0,80,20);
+    //controls.update();*/
 
     document.getElementById("main-container").addEventListener( 'touchstart', process_touchstart, false );
     document.getElementById("main-container").addEventListener("touchcancel", process_touchstart, false);
