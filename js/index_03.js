@@ -54,24 +54,13 @@ function setupWorld() {
 
 
 
-var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.jpg' );
-    floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
-    floorTexture.repeat.set( 1, 1 );
-    var floorMaterial = new THREE.MeshPhongMaterial( { map: floorTexture, side: THREE.DoubleSide, transparent:true } );
-    var floorGeometry = new THREE.PlaneGeometry(320, 190, 1, 1);
-    var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-    floor.position.y = 50;
-    floor.position.z = 10;
-    floor.position.x = -95;
-    floor.rotation.x = Math.PI / 2;
-    floor.receiveShadow = true;
-    scene.add(floor);
+
 
     var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.jpg' );
     floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
     floorTexture.repeat.set( 1, 1 );
     var floorMaterial = new THREE.MeshPhongMaterial( { map: floorTexture, side: THREE.DoubleSide, transparent:true } );
-    var floorGeometry = new THREE.PlaneGeometry(120, 200, 1, 1);
+    var floorGeometry = new THREE.PlaneGeometry(600, 800, 1, 1);
     var floor = new THREE.Mesh(floorGeometry, floorMaterial);
     floor.position.y = 50;
     floor.position.z = -180;
@@ -220,7 +209,7 @@ var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.j
    };
    manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
        loadingScreen.innerHTML = (itemsLoaded / itemsTotal * 100) + "%loaded";
-       loadingScreen.innerHTML =  '<br>' + '<br>' +  '<br>' + '&nbsp;' + '&nbsp;' + " Arte por: deculturalization" + '<br>' + '<br>' +  '<br>' + '<br>' +  '&nbsp;' + '&nbsp;' + '&nbsp;' + "UTILIZA EL CONTROL IZQUIERDO" + '<br>' + '&nbsp;' + '&nbsp;' +  " PARA MOVERTE EN EL ESPACIO" + '<br>' + '<br>' +   '&nbsp;' + '&nbsp;' + '&nbsp;' + "UTILIZA EL CONTROL DERECHO" + '<br>' + '&nbsp;' + '&nbsp;' +  " PARA ROTAR EN EL ESPACIO"  + '<br>' + '<br>' +  '<br>' + '<br>' +  '&nbsp;' + '&nbsp;' + '&nbsp;' + ((itemsLoaded / itemsTotal * 100) + "% loaded") + '<br>' + '<br>' +  '&nbsp;' + '&nbsp;' +  '&nbsp;' + "Loading:" + '<br>' +  '&nbsp;' + '&nbsp;' + '&nbsp;' +  url, itemsLoaded, itemsTotal;
+       loadingScreen.innerHTML =  '<br>' + '<br>' +  '<br>' + '&nbsp;' + '&nbsp;' + " Arte por: @luisenzk" + '<br>' + '<br>' +  '<br>' + '<br>' +  '&nbsp;' + '&nbsp;' + '&nbsp;' + "UTILIZA EL CONTROL IZQUIERDO" + '<br>' + '&nbsp;' + '&nbsp;' +  " PARA MOVERTE EN EL ESPACIO" + '<br>' + '<br>' +   '&nbsp;' + '&nbsp;' + '&nbsp;' + "UTILIZA EL CONTROL DERECHO" + '<br>' + '&nbsp;' + '&nbsp;' +  " PARA ROTAR EN EL ESPACIO"  + '<br>' + '<br>' +  '<br>' + '<br>' +  '&nbsp;' + '&nbsp;' + '&nbsp;' + ((itemsLoaded / itemsTotal * 100) + "% loaded") + '<br>' + '<br>' +  '&nbsp;' + '&nbsp;' +  '&nbsp;' + "Loading:" + '<br>' +  '&nbsp;' + '&nbsp;' + '&nbsp;' +  url, itemsLoaded, itemsTotal;
        console.log((itemsLoaded / itemsTotal * 100) + "%loaded");
        //loadingScreen.innerHTML = item, itemsLoaded, itemsTotal;
        console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
@@ -246,6 +235,20 @@ var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.j
       });
     });
 
+    var murakit = new THREE.MTLLoader(manager);
+    murakit.load("luisenzk/models/monitos.mtl", function(materials) {
+      materials.preload();
+      console.log(materials);
+    
+      var murakit = new THREE.OBJLoader(manager);
+      murakit.setMaterials(materials);
+    
+      murakit.load("luisenzk/models/monitos.obj", function(mesh) {
+      scene.add(mesh);
+        
+      });
+    });
+
 
     var murakit = new THREE.MTLLoader(manager);
     murakit.load("luisenzk/models/2.mtl", function(materials) {
@@ -256,6 +259,20 @@ var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.j
       murakit.setMaterials(materials);
     
       murakit.load("luisenzk/models/2.obj", function(mesh) {
+      scene.add(mesh);
+        
+      });
+    });
+
+    var murakit = new THREE.MTLLoader(manager);
+    murakit.load("luisenzk/models/wall.mtl", function(materials) {
+      materials.preload();
+      console.log(materials);
+    
+      var murakit = new THREE.OBJLoader(manager);
+      murakit.setMaterials(materials);
+    
+      murakit.load("luisenzk/models/wall.obj", function(mesh) {
       scene.add(mesh);
         
       });
@@ -332,19 +349,39 @@ var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.j
       });
     });
 
-    var lightH = new THREE.HemisphereLight( 0xFFC3EA, 1 ); // soft white light
+    var murakit = new THREE.MTLLoader(manager);
+    murakit.load("luisenzk/models/techo.mtl", function(materials) {
+      materials.preload();
+      console.log(materials);
+    
+      var murakit = new THREE.OBJLoader(manager);
+      murakit.setMaterials(materials);
+    
+      murakit.load("luisenzk/models/techo.obj", function(mesh) {
+      scene.add(mesh);
+        
+      });
+    });
+
+    var lightH = new THREE.AmbientLight( 0x800040, 0.8 ); // soft white light
+    lightH.position.set( 0, 450, 0 );
     scene.add( lightH );
 
-    const light = new THREE.PointLight( 0xFFC3EA, 4, 100 );
+
+    var lightH2 = new THREE.AmbientLight( 0xffffff, 0.8 ); // soft white light
+    lightH2.position.set( 0, 450, 0 );
+    scene.add( lightH2 );
+
+    const light = new THREE.PointLight( 0x800040, 0.2, 100 );
     light.position.set( -150, 50, 0 );
     scene.add( light );
 
-    const lightPoint = new THREE.PointLight( 0xFFC3EA, 4, 100 );
-    lightPoint.position.set( -20, 50, -30 );
+    const lightPoint = new THREE.PointLight( 0x800040, 0.2, 0 );
+    lightPoint.position.set( -20, 00, -30 );
     scene.add( lightPoint );
 
-    const lightPointTwo = new THREE.PointLight( 0xFFC3EA, 4, 100 );
-    lightPointTwo.position.set( -100, 50, -160 );
+    const lightPointTwo = new THREE.PointLight( 0x800040, 0.2, 200 );
+    lightPointTwo.position.set( -100, 40, -300 );
     scene.add( lightPointTwo );
 
 
@@ -370,11 +407,11 @@ var floorTexture = new THREE.ImageUtils.loadTexture( 'luisenzk/models/abstract.j
         rotationFactor: 0.005,
         maxPitch: 90,
         hitTest: true,
-        hitTestDistance: 40
+        hitTestDistance: 10
     };
     
     controls = new TouchControls($container.parent(), camera, options);
-    controls.setPosition(0, 60, 0);
+    controls.setPosition(0, 70, 0);
     controls.addToScene(scene);
 
 
