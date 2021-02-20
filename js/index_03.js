@@ -404,7 +404,7 @@ function setupWorld() {
     var options = {
         speedFactor: 0.5,
         delta: 1,
-        rotationFactor: 0.005,
+        rotationFactor: 0.02,
         maxPitch: 90,
         hitTest: true,
         hitTestDistance: 10
