@@ -181,14 +181,29 @@ function setupWorld() {
 
 
     var murakit = new THREE.MTLLoader(manager);
-    murakit.load("italo/models/computer.mtl", function(materials) {
+    murakit.load("italo/models/computer2.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
       var murakit = new THREE.OBJLoader(manager);
       murakit.setMaterials(materials);
     
-      murakit.load("italo/models/computer.obj", function(mesh) {
+      murakit.load("italo/models/computer2.obj", function(mesh) {
+      scene.add(mesh);
+        
+      });
+    });
+
+
+    var murakit = new THREE.MTLLoader(manager);
+    murakit.load("italo/models/computer1.mtl", function(materials) {
+      materials.preload();
+      console.log(materials);
+    
+      var murakit = new THREE.OBJLoader(manager);
+      murakit.setMaterials(materials);
+    
+      murakit.load("italo/models/computer1.obj", function(mesh) {
       scene.add(mesh);
         
       });

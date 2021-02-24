@@ -236,21 +236,6 @@ function setupWorld() {
     });
 
     var murakit = new THREE.MTLLoader(manager);
-    murakit.load("luisenzk/models/monitos.mtl", function(materials) {
-      materials.preload();
-      console.log(materials);
-    
-      var murakit = new THREE.OBJLoader(manager);
-      murakit.setMaterials(materials);
-    
-      murakit.load("luisenzk/models/monitos.obj", function(mesh) {
-      scene.add(mesh);
-        
-      });
-    });
-
-
-    var murakit = new THREE.MTLLoader(manager);
     murakit.load("luisenzk/models/2.mtl", function(materials) {
       materials.preload();
       console.log(materials);
@@ -335,52 +320,55 @@ function setupWorld() {
       });
     });
 
+
     var murakit = new THREE.MTLLoader(manager);
-    murakit.load("luisenzk/models/7.mtl", function(materials) {
+    murakit.load("luisenzk/models/techio.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
       var murakit = new THREE.OBJLoader(manager);
       murakit.setMaterials(materials);
     
-      murakit.load("luisenzk/models/7.obj", function(mesh) {
+      murakit.load("luisenzk/models/techio.obj", function(mesh) {
       scene.add(mesh);
         
       });
     });
 
     var murakit = new THREE.MTLLoader(manager);
-    murakit.load("luisenzk/models/techo.mtl", function(materials) {
+    murakit.load("luisenzk/models/water.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
       var murakit = new THREE.OBJLoader(manager);
       murakit.setMaterials(materials);
     
-      murakit.load("luisenzk/models/techo.obj", function(mesh) {
+      murakit.load("luisenzk/models/water.obj", function(mesh) {
       scene.add(mesh);
         
       });
     });
 
-    var lightH = new THREE.AmbientLight( 0x800040, 0.8 ); // soft white light
+
+
+    var lightH = new THREE.AmbientLight( 0x800040, 0.7 ); // soft white light
     lightH.position.set( 0, 450, 0 );
     scene.add( lightH );
 
 
-    var lightH2 = new THREE.AmbientLight( 0xffffff, 0.8 ); // soft white light
+    var lightH2 = new THREE.AmbientLight( 0xffffff, 0.7 ); // soft white light
     lightH2.position.set( 0, 450, 0 );
     scene.add( lightH2 );
 
-    const light = new THREE.PointLight( 0x800040, 0.2, 100 );
+    const light = new THREE.PointLight( 0xffffff, 0.6, 100 );
     light.position.set( -150, 50, 0 );
     scene.add( light );
 
-    const lightPoint = new THREE.PointLight( 0x800040, 0.2, 0 );
+    const lightPoint = new THREE.PointLight( 0xffffff, 0.6, 100 );
     lightPoint.position.set( -20, 00, -30 );
     scene.add( lightPoint );
 
-    const lightPointTwo = new THREE.PointLight( 0x800040, 0.2, 200 );
+    const lightPointTwo = new THREE.PointLight( 0xffffff, 0.6, 90 );
     lightPointTwo.position.set( -100, 40, -300 );
     scene.add( lightPointTwo );
 
@@ -404,7 +392,7 @@ function setupWorld() {
     var options = {
         speedFactor: 0.5,
         delta: 1,
-        rotationFactor: 0.02,
+        rotationFactor: 0.008,
         maxPitch: 90,
         hitTest: true,
         hitTestDistance: 10
