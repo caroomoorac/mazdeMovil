@@ -91,19 +91,77 @@ function setupWorld() {
     };
 
     var murakit = new THREE.MTLLoader(manager);
-    murakit.load("brunaD/mtl/brunacinema.mtl", function(materials) {
+    murakit.load("brunaD/mtl/arbolito.mtl", function(materials) {
       materials.preload();
       console.log(materials);
     
       var murakit = new THREE.OBJLoader(manager);
       murakit.setMaterials(materials);
     
-      murakit.load("brunaD/mtl/brunacinema2.obj", function(mesh) {
+      murakit.load("brunaD/mtl/arbolito.obj", function(mesh) {
+      scene.add(mesh);
+        
+      });
+    });
+
+    var murakit = new THREE.MTLLoader(manager);
+    murakit.load("brunaD/mtl/flowers.mtl", function(materials) {
+      materials.preload();
+      console.log(materials);
+    
+      var murakit = new THREE.OBJLoader(manager);
+      murakit.setMaterials(materials);
+    
+      murakit.load("brunaD/mtl/flowers.obj", function(mesh) {
       scene.add(mesh);
         
       });
     });
     
+    var murakit = new THREE.MTLLoader(manager);
+    murakit.load("brunaD/mtl/animals.mtl", function(materials) {
+      materials.preload();
+      console.log(materials);
+    
+      var murakit = new THREE.OBJLoader(manager);
+      murakit.setMaterials(materials);
+    
+      murakit.load("brunaD/mtl/animals.obj", function(mesh) {
+      scene.add(mesh);
+        
+      });
+    });
+
+    var murakit = new THREE.MTLLoader(manager);
+    murakit.load("brunaD/mtl/cat.mtl", function(materials) {
+      materials.preload();
+      console.log(materials);
+    
+      var murakit = new THREE.OBJLoader(manager);
+      murakit.setMaterials(materials);
+    
+      murakit.load("brunaD/mtl/cat.obj", function(mesh) {
+      scene.add(mesh);
+        
+      });
+    });
+
+
+    var murakit = new THREE.MTLLoader(manager);
+    murakit.load("brunaD/mtl/walls.mtl", function(materials) {
+      materials.preload();
+      console.log(materials);
+    
+      var murakit = new THREE.OBJLoader(manager);
+      murakit.setMaterials(materials);
+    
+      murakit.load("brunaD/mtl/walls.obj", function(mesh) {
+      scene.add(mesh);
+        
+      });
+    });
+
+
     var lightH = new THREE.AmbientLight( 0x800040, 0.8 ); // soft white light
     lightH.position.set( 0, 450, 0 );
     //scene.add( lightH );
@@ -152,7 +210,7 @@ function setupWorld() {
     };
     
     controls = new TouchControls($container.parent(), camera, options);
-    controls.setPosition(30, 20, 80);
+    controls.setPosition(-90, 20, 180);
     controls.addToScene(scene);
 
 
