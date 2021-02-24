@@ -119,6 +119,8 @@ ul li a { font-family: 'Press Start 2P', cursive; }
 
 .navbar { 
     background-color: black;
+    z-index: 99;
+
 } 
 
 .navbar-toggler:focus,
@@ -294,6 +296,7 @@ h1 {
         font-family: 'Press Start 2P', cursive;
         font-size: 10px;
         color: white;
+        z-index: 98;
         /*opacity: 1;
         transition: 1s opacity;*/
     }
